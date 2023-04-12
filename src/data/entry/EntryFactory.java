@@ -9,11 +9,11 @@ public class EntryFactory {
 	private Integer entryCount = 0;
 	private Storage db;
 
-	public EntryFactory() {
-		db = new Storage("www.LastMinuteEngineering.com/storage", 100);
+	private EntryFactory() {
+		db = Storage.getInstance();
 	}
 
-	public static EntryFactory getInstance() {
+	public static synchronized EntryFactory getInstance() {
 		// return singleton object when created.
 		if (instance == null) {
 			instance = new EntryFactory();

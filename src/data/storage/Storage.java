@@ -7,16 +7,29 @@ public class Storage {
 
 	private Integer capacity;
 	private String address;
-	private static HashMap<String, Entry> entries= new HashMap<>();
+	private HashMap<String, Entry> entries;
+	private static Storage instance;
 	
 	private static String module = "Storage:\t";  
 	
-	public Storage(String address, Integer capacity) {
+	private Storage(String address, Integer capacity) {
 		this.address = address;
 		this.capacity = capacity;
+		this.entries= new HashMap<>();
 	};
 	
-	public static Entry getEntry(String id){
+	public static synchronized void createDatabase() {
+		// create instance if necessary.
+		if (instance == null) {
+			instance = new Storage("www.LastMinuteEngineering.com/storage", 100);
+		}
+	}
+	
+	public static Storage getInstance() {
+		return instance;
+	}
+	
+	public Entry getEntry(String id){
 		// return entry if available.
 		Entry entry = entries.getOrDefault(id, null);
 		if (entry == null) {
@@ -35,7 +48,7 @@ public class Storage {
 		}
 		// check available storage; warn user if storage full.
 		else if (entries.size()>= capacity) {
-			System.out.println(module+ "Cannot add entry; Storage full" );
+			System.out.println(module+ "Storage full; cancelling operation." );
 			return;
 		}
 		

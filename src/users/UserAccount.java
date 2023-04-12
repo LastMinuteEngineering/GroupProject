@@ -1,6 +1,7 @@
 package users;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import common.Types.*;
 import data.entry.Entry;
@@ -19,30 +20,29 @@ public abstract class UserAccount {
 //
 //	User Account functions
 //  
-	protected String main_divider = "-".repeat(50);
-	protected String section_divider = "-".repeat(25);
-	public abstract void displayAccountDetails();
+	
+	public abstract String getAccountDetails(Boolean fullDetails);
+	
+	public void displayAccountDetails(Boolean fullDetails) {
+		String string = getAccountDetails(fullDetails);
+		System.out.println(string);
+	};
 	
 	protected String getBaseInfo() {
-		String string = main_divider
-				+ "\nName: \t" + firstName + " " 
-					+ middleName.length() == null ?  lastName : 
-						middleName + " " + lastName 
-				+ "\nId:\t" + id
-				+ "\nPhone Number:\t" + phoneNumber
-				+ "\nAccess Level:\t" + accessLevel.description
+		String string = getQuickInfo()
+				+ "\n\tPhone Number: \t" + phoneNumber
+				+ "\n\tAccess Level: \t" + accessLevel.description
 				;
 				
 		return string;
 	};
 	
 	protected String getQuickInfo() {
-		String string = main_divider
-				+ "\nName: \t" + firstName + " " 
+		String string = ""
+				+ "Name: \t" + firstName + " " 
 					+ middleName.length() == null ?  lastName : 
 						middleName + " " + lastName 
-				+ "\nId:\t" + id
-				+ "\nAccess Level:\t" + accessLevel.description
+				+ "\n\tId: \t" + id
 				;
 				
 		return string;
@@ -65,8 +65,10 @@ public abstract class UserAccount {
 	public void displayAllEntries() {
 		// display all entries with without all details.
 		System.out.println(firstName+"'s Entries \n");
-		for (int i = 0; i < entries.size(); i++) {
-			String entryId = entries.get(i);
+		
+		Iterator<String> entryIterator = entries.iterator();
+		while(entryIterator.hasNext()) {
+			String entryId = entryIterator.next();
 			getEntry(entryId).displayDetails(false);
 			
 		}
@@ -84,7 +86,8 @@ public abstract class UserAccount {
 	};
 	
 	protected Entry getEntry(String entryId) {
-		return Storage.getEntry(entryId);
+		Storage db = Storage.getInstance();
+		return db.getEntry(entryId);
 	};
 	
 	protected void modifyEntry(Entry entry) {

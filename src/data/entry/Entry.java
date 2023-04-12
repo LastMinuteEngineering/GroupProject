@@ -1,5 +1,8 @@
 package data.entry;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import common.Types.*;
 
 public abstract class Entry {
@@ -8,14 +11,13 @@ public abstract class Entry {
 	protected String title;
 	protected EntryStatus status;
 	protected String creation;
-	protected Content[] content;
+	protected ArrayList<Content> content;
 
 //
 //  Abstract functions
 //
-	public abstract void displayDetails(Boolean fullDetails);
 	public abstract void promptForDetails();
-	
+	public abstract String getDetails(Boolean fullDetails);
 //
 //  Getter functions
 //
@@ -24,42 +26,38 @@ public abstract class Entry {
 	};
 	
 //	
-//	Protected printing variables & functions
+//	Entry access functions.
 // 
-	protected String main_divider = "-".repeat(50);
-	protected String section_divider = "-".repeat(25);
+	public void displayDetails(Boolean fullDetails) {
+		String string = getDetails(fullDetails);
+		System.out.println(string);
+	};
+	
 	protected String getBaseInformation() {
 		
-		String string = main_divider
-		+ "\n" + title
-		+ "\n" + section_divider
-		+ "\nID:\t" + id
-		+ "\nStatus:\t" + status.description
-		+ "\nCreation:\t" + creation
-		+ "\n" + section_divider
-		;
+		String string = getQuickInfo()
+		+ "\n\tCreation: \t" + creation;
 		
-		for (int i=0; i < content.length; i++) {
-			Content content = this.content[i];
-			
+		Iterator<Content> contentIterator = content.iterator();
+		while(contentIterator.hasNext()) {
+			Content content = contentIterator.next();
+		
 			string = string
-			+ "\n" + content.label
-			+ "\n" + content.input;
+			+ "\n\t" + content.label
+			+ "\n\t\t" + content.input;
 		}
 		
-		string = string + "\n" + section_divider;
+		string = string + "\n";
 		
 		
 		return string;
 	};
 	
 	protected String getQuickInfo() {
-		String string = main_divider
-				+ "\n" + title
-				+ "\nID:\t" + id
-				+ "\nStatus:\t" + status.description
-				+ "\nCreation:\t" + creation
-				+ "\n" + main_divider
+		String string = ""
+				+ "Title: \t" + title
+				+ "\n\tID: \t" + id
+				+ "\n\tStatus: \t" + status.description
 				;
 				
 		return string;
