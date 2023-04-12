@@ -1,5 +1,8 @@
 package data.entry;
 
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import common.types.CustomEnums.*;
 import data.storage.Storage;
 
@@ -28,8 +31,7 @@ public class EntryFactory {
 		// Call proper method based on type.
 //		switch type:
 //			createEntryType()
-		entryCount++;
-
+		
 		// add to storage.
 		db.addEntry(entry);
 
@@ -37,9 +39,11 @@ public class EntryFactory {
 	};
 
 	// TODO
-//	private Entry createHealthIssueReport() {
-//		
-//	};
+	private Entry createHealthIssueReport() {
+		
+		return new HealthIssueReport(getId(), getTimeStamp());
+		
+	};
 
 //	private Entry createSocialEvent() {
 //	
@@ -56,5 +60,25 @@ public class EntryFactory {
 //	private Entry createMentalHealthSupportRequest() {
 //	
 //	};
+	
+	
+//
+//	Utility functions
+//	
+	private String getId() {
+		// get entryCount in string format then increment.
+		String id = "" + entryCount;
+		entryCount++;
+		return id;
+	}
+	
+	private String getTimeStamp() {
+		// get time in desired format : "month, data, year hour:minute:second AM/PM"
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss a");
+		// get current time
+		ZonedDateTime now = ZonedDateTime.now( ZoneId.of("GMT-4") ); 
+		// return formatted time.
+		return now.format(formatter);
+	}
 
 }

@@ -101,19 +101,19 @@ public class Course {
 		String string = getQuickInfo();
 		if (fullDetails) {
 			string = string
-			+ "\n\tCourse Capacity: \t" + students.size() + "/" + capacity
+			+ "\tCourse Capacity: \t" + students.size() + "/" + capacity
 			+ "\n\tInstructor: \t" + instructor
-			+ "\n\tStudents: \n";
+			+ "\n\tStudents: ";
 			
 			Iterator<UserAccount> studentIterator = getStudents();
 			while (studentIterator.hasNext()) {
 				UserAccount student = studentIterator.next();
 				string= string
-				+ "\t" + student.getAccountDetails(false) 
-				+ "\n\tGrade:\t" + this.students.get(student).getLetterGrade()
-				+ "\n";
+				+ "\n\t" + student.getAccountDetails(false) 
+				+ "\n\tGrade:\t" + this.students.get(student).getLetterGrade();
 			}
 		}
+		
 		string += "\n";
 		return string;
 		
@@ -125,7 +125,7 @@ public class Course {
 				+ "Course Name:\t" + name
 				+ "\n\tCourse Prefix: \t" + prefix 
 				+ "\n\tCourse Number:\t" + numb
-				;
+				+ "\n";
 				
 		return string;
 	};

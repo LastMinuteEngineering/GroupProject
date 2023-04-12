@@ -14,7 +14,7 @@ public abstract class UserAccount {
 	protected String firstName, middleName, lastName;
 	protected String id;
 	protected String phoneNumber;
-	protected AccessLevel accessLevel = AccessLevel.StandardAccess;
+	protected AccessLevel accessLevel;
 	protected ArrayList<String> entryIds;
 	
 //
@@ -30,9 +30,9 @@ public abstract class UserAccount {
 	
 	protected String getBaseInfo() {
 		String string = getQuickInfo()
-				+ "\n\tPhone Number: \t" + phoneNumber
+				+ "\tPhone Number: \t" + phoneNumber
 				+ "\n\tAccess Level: \t" + accessLevel.description
-				;
+				+ "\n";
 				
 		return string;
 	};
@@ -43,7 +43,7 @@ public abstract class UserAccount {
 					+ middleName.length() == null ?  lastName : 
 						middleName + " " + lastName 
 				+ "\n\tId: \t" + id
-				;
+				+ "\n";
 				
 		return string;
 	};
