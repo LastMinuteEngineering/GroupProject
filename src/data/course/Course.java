@@ -1,8 +1,11 @@
 package data.course;
 
 import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.HashMap;
 import java.util.ArrayList;
 
+import common.types.Grade;
 import users.UserAccount;
 
 public class Course {
@@ -11,7 +14,7 @@ public class Course {
 	private Integer numb;
 	private String name;
 	private Integer capacity;
-	private ArrayList<UserAccount> students;
+	private HashMap<UserAccount, Grade> students;
 	private UserAccount instructor;
 	
 	private static String module; 
@@ -21,10 +24,48 @@ public class Course {
 		this.numb = numb;
 		this.name = name;
 		this.capacity = capacity;
-		this.students = new ArrayList<>();
+		this.students = new HashMap<>();
 		module = prefix + " " + numb + ":\t"; 
 	}
 	
+
+//
+//	Getters
+//		
+	public Iterator<UserAccount> getStudents(){
+		// create list to house student accounts.
+		ArrayList<UserAccount> students = new ArrayList<>();
+		
+		// add each student from hashmap into list.
+		Iterator<Entry<UserAccount, Grade>> studentsIterator = this.students.entrySet().iterator();
+		
+		while(studentsIterator.hasNext()) {
+			students.add(studentsIterator.next().getKey());
+		}
+		
+		return students.iterator();
+	}
+	
+	
+	public UserAccount getInstructor() {
+		return instructor;
+	}
+	
+	public String getStudentGrade(UserAccount student, Boolean letterGrade) {
+		
+		// ensure student is in course.
+		if (!inCourse(student)) {
+			return "Student not in course";
+		}
+		
+		// convert grade to user-specified format.
+		String grade = letterGrade ? students.get(student).getLetterGrade() : "" + students.get(student).getNumberGrade();
+		return grade;
+	}
+	
+//
+//	Setters
+//	
 	public void addStudent(UserAccount student) {
 		
 		// ensure course not filled past capacity.
@@ -32,20 +73,22 @@ public class Course {
 			System.out.println(module+ "Course full; cancelling operation." );
 			return;
 		}
-		students.add(student);
-	}
-	
-	public ArrayList<UserAccount> getStudents(){
-		return students;
+		// ensure student not already in course.
+		if (inCourse(student)) {
+			System.out.println(module+ "Student already in course; cancelling operation." );
+			return;
+		}
+		
+		students.put(student, new Grade(100));
 	}
 	
 	public void changeInstructor(UserAccount instructor) {
 		this.instructor = instructor;
 	}
 	
-	public UserAccount getInstructor() {
-		return instructor;
-	}
+//	
+//	Full Course Access/Printing functions
+//	
 	
 	public void displayDetails(Boolean fullDetails) {
 		String string = getDetails(fullDetails);
@@ -54,6 +97,7 @@ public class Course {
 	
 	public String getDetails(Boolean fullDetails) {
 		
+		//	Get extra course info, if specified.
 		String string = getQuickInfo();
 		if (fullDetails) {
 			string = string
@@ -61,20 +105,22 @@ public class Course {
 			+ "\n\tInstructor: \t" + instructor
 			+ "\n\tStudents: \n";
 			
-			Iterator<UserAccount> studentIterator = students.iterator();
+			Iterator<UserAccount> studentIterator = getStudents();
 			while (studentIterator.hasNext()) {
 				UserAccount student = studentIterator.next();
-				string+= "\t" + student.getAccountDetails(false) + "/n";
+				string= string
+				+ "\t" + student.getAccountDetails(false) 
+				+ "\n\tGrade:\t" + this.students.get(student).getLetterGrade()
+				+ "\n";
 			}
 		}
-		
 		string += "\n";
-		
 		return string;
 		
 	}
 	
 	protected String getQuickInfo() {
+		// Get simple course Info.		
 		String string = ""
 				+ "Course Name:\t" + name
 				+ "\n\tCourse Prefix: \t" + prefix 
@@ -83,5 +129,12 @@ public class Course {
 				
 		return string;
 	};
+	
+//	
+//	Utility
+//	
+	private Boolean inCourse(UserAccount student) {
+		return students.getOrDefault(student, null) != null;
+	}
 	
 }

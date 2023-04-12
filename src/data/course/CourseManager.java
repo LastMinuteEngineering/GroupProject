@@ -1,6 +1,7 @@
 package data.course;
 
 import java.util.Iterator;
+import java.util.Map.Entry;
 import java.util.HashMap;
 
 public class CourseManager {
@@ -60,7 +61,26 @@ public class CourseManager {
 		return subjectCourses.get(numb);
 	}
 	
-	public void displayAvailableCourses();
+	public void displayAvailableCourses() {
+		
+		// iterate over all available subject prefixes.
+		Iterator<Entry<String, HashMap<Integer, Course>>> allCourseIterator = courses.entrySet().iterator();
+		
+		while (allCourseIterator.hasNext()) {
+			HashMap<Integer, Course> subjectCourses = allCourseIterator.next().getValue(); 
+			
+			// iterate over all courses in subject prefix.
+			Iterator<Entry<Integer, Course>> courseIterator = subjectCourses.entrySet().iterator();
+	
+			while (courseIterator.hasNext()) {
+				
+				Course course = courseIterator.next().getValue();
+				course.displayDetails(false);
+			}
+			
+		}
+		
+	};
 	
 	
 	

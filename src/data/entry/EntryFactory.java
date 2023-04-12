@@ -1,6 +1,6 @@
 package data.entry;
 
-import common.Types.*;
+import common.types.CustomEnums.*;
 import data.storage.Storage;
 
 public class EntryFactory {
@@ -36,6 +36,7 @@ public class EntryFactory {
 		return entry;
 	};
 
+	// TODO
 //	private Entry createHealthIssueReport() {
 //		
 //	};

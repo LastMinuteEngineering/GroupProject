@@ -1,4 +1,4 @@
-package data.entry;
+package common.types;
 
 public class Content {
 

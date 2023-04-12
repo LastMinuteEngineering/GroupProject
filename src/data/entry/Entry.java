@@ -2,8 +2,10 @@ package data.entry;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
-import common.Types.*;
+import common.types.Content;
+import common.types.CustomEnums.*;
 
 public abstract class Entry {
 	
@@ -12,18 +14,38 @@ public abstract class Entry {
 	protected EntryStatus status;
 	protected String creation;
 	protected ArrayList<Content> content;
+	
+	protected Scanner input = new Scanner (System.in);
 
 //
 //  Abstract functions
 //
 	public abstract void promptForDetails();
 	public abstract String getDetails(Boolean fullDetails);
+	
 //
 //  Getter functions
 //
 	public String getId() {
 		return id;
 	};
+	
+//
+//  Getter functions
+//
+	protected String modifyVariable(String toModify, String label) {
+		
+		//TODO
+//		if (toModify.length() == 0) {
+//			System.out.println(
+//					"Stored " + label 
+//					+ ":\n")
+//		}
+		
+		return toModify;
+	};
+	
+	
 	
 //	
 //	Entry access functions.

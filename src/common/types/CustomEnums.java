@@ -1,6 +1,6 @@
-package common;
+package common.types;
 
-public class Types {
+public class CustomEnums {
 
 	public enum EntryType{
 		HealthIssueReport("Health Issue Report"),
@@ -43,6 +43,20 @@ public class Types {
 		
 		// assign string version of Status for printing.
 		private EntryStatus(String description) {
+			this.description = description;
+		}
+	}
+	
+	public enum Urgency{
+		Low("Low Priority"),
+		Medium("Medium Priority"),
+		High("High Priority"),
+		Critical("Critical Priority");
+		
+		public final String description;
+		
+		// assign string version of Status for printing.
+		private Urgency(String description) {
 			this.description = description;
 		}
 	}

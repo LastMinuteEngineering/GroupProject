@@ -3,7 +3,7 @@ package users;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import common.Types.*;
+import common.types.CustomEnums.*;
 import data.entry.Entry;
 import data.entry.EntryFactory;
 import data.storage.Storage;
@@ -15,7 +15,7 @@ public abstract class UserAccount {
 	protected String id;
 	protected String phoneNumber;
 	protected AccessLevel accessLevel = AccessLevel.StandardAccess;
-	protected ArrayList<String> entries;
+	protected ArrayList<String> entryIds;
 	
 //
 //	User Account functions
@@ -57,20 +57,19 @@ public abstract class UserAccount {
 		EntryFactory factory = EntryFactory.getInstance();
 		Entry entry = factory.createEntry(type);
 		
-		// add to list.
-		entries.add(entry.getId());
 		modifyEntry(entry);	
+		// add to list.
+		entryIds.add(entry.getId());
 	};
 	
 	public void displayAllEntries() {
 		// display all entries with without all details.
 		System.out.println(firstName+"'s Entries \n");
 		
-		Iterator<String> entryIterator = entries.iterator();
-		while(entryIterator.hasNext()) {
-			String entryId = entryIterator.next();
+		Iterator<String> entryIdIterator = entryIds.iterator();
+		while(entryIdIterator.hasNext()) {
+			String entryId = entryIdIterator.next();
 			getEntry(entryId).displayDetails(false);
-			
 		}
 	};
 	
@@ -80,16 +79,17 @@ public abstract class UserAccount {
 			
 	};
 	
-	public void modifyEntry(String entryId) {
-		Entry entry = getEntry(entryId);
-		modifyEntry(entry);
-	};
-	
 	protected Entry getEntry(String entryId) {
 		Storage db = Storage.getInstance();
 		return db.getEntry(entryId);
 	};
 	
+	public void modifyEntry(String entryId) {
+		Entry entry = getEntry(entryId);
+		modifyEntry(entry);
+	};
+	
+	// overload modifyEntry when passed entry object rather than entryId
 	protected void modifyEntry(Entry entry) {
 		// allow entry to facilitate input and data modification.
 		entry.promptForDetails();
