@@ -5,7 +5,9 @@ public class AccountGroup {
 	private String id;
 	private String Description;
 	
-	public UserAccount[] getMembers();
+	public UserAccount[] getMembers() {
+		return UserAccount[];
+	}
 	
 	public UserAccount addMember;
 }
