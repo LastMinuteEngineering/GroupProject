@@ -110,11 +110,11 @@ public class Course {
 				UserAccount student = studentIterator.next();
 				string= string
 				+ "\n\t" + student.getAccountDetails(false) 
-				+ "\n\tGrade:\t" + this.students.get(student).getLetterGrade();
+				+ "\nGrade:\t" + this.students.get(student).getLetterGrade()
+				+ "\n";
 			}
 		}
 		
-		string += "\n";
 		return string;
 		
 	}

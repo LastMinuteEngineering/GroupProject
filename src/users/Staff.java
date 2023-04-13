@@ -28,9 +28,13 @@ public class Staff extends UserAccount {
 		
 		if (fullDetails) {
 			string = string
-			+ "\tSupervisor:\t\n" + (supervisor == null ? "None\n": supervisor.getAccountDetails(false))
+			+ "\tSupervisor:\t\n" + (supervisor == null ? 
+					"\t" + "-".repeat(10)
+					+ "\n\tNone\n": 
+						"\t" + "-".repeat(10) +
+						"\n\t" +supervisor.getAccountDetails(false))
 			+ "\tSubordinates:"
-			+ "\n\t" + getMultiAccountDetails(subordinates.iterator(), false)
+			+ "\n" + getMultiAccountDetails(subordinates.iterator(), false)
 			+ "\n";
 		}
 		return string;

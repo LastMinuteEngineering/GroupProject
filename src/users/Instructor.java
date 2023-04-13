@@ -32,7 +32,7 @@ public class Instructor extends UserAccount {
 		if (fullDetails) {
 			string = string
 			+ "\tTeaching Courses:"
-			+ "\n\t" + getCourseLoadSummary(courses.iterator(), false);
+			+ "\n" + getCourseLoadSummary(courses.iterator(), false);
 		}
 		
 		return string;
@@ -65,8 +65,8 @@ public class Instructor extends UserAccount {
 	}
 	
 	public void displayCourses() {
-		String string = "Teaching Courses:"
-				+ "\n\t" + getCourseLoadSummary(courses.iterator(), false);
+		String string = firstName + " " + lastName + " Teaching Courses:"
+				+ "\n" + getCourseLoadSummary(courses.iterator(), false);
 		
 		System.out.println(string);
 	}

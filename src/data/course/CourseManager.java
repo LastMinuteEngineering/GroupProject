@@ -27,7 +27,7 @@ public class CourseManager {
 	public void addCourse(String prefix, String numb, String name, Integer capacity) {
 		
 		// Determine if course already exists.
-		if (getCourse(prefix, numb) != null) {
+		if (getCourse(prefix, numb, false) != null) {
 			
 			System.out.println(module+ "Course already exists; cancelling operation." );
 			return;
@@ -51,18 +51,27 @@ public class CourseManager {
 	
 	public Course getCourse(String prefix, String numb) {
 		
-		// Determine if course exists.
-		HashMap<String, Course> subjectCourses = courses.getOrDefault(prefix, null);
-		if ((subjectCourses == null) || (subjectCourses.getOrDefault(numb, null) == null) ) {
-			System.out.println(module+ "Course does not exist." );
-			return null;
-		}
-			
-		return subjectCourses.get(numb);
+		return getCourse(prefix, numb, true);
 	}
+	
+	// overloaded to show output.
+	private Course getCourse(String prefix, String numb, Boolean withOutput) {
+			
+			// Determine if course exists.
+			HashMap<String, Course> subjectCourses = courses.getOrDefault(prefix, null);
+			if ((subjectCourses == null) || (subjectCourses.getOrDefault(numb, null) == null) ) {
+				if (withOutput) {
+					System.out.println(module+ "Course does not exist." );
+				}
+				return null;
+			}
+				
+			return subjectCourses.get(numb);
+		}
 	
 	public void displayAvailableCourses() {
 		
+		System.out.println(module+ "Available Courses\n" + "-".repeat(40));
 		// iterate over all available subject prefixes.
 		Iterator<Entry<String, HashMap<String, Course>>> allCourseIterator = courses.entrySet().iterator();
 		

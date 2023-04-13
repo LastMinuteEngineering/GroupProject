@@ -38,9 +38,13 @@ public class Student extends UserAccount {
 		if (fullDetails) {
 			string = string
 			+ "\tGPA:\t" + getGpa()		
-			+ "\n\tAdvisor:\t\n" + (advisor == null ? "None\n": advisor.getAccountDetails(false))
+			+ "\n\tAdvisor:\t\n" + (advisor == null ? 
+					"\t" + "-".repeat(10)
+					+ "\n\tNone\n": 
+					"\t" + "-".repeat(10) + 
+					"\n\t" + advisor.getAccountDetails(false))
 			+ "\tTaking Courses:"
-			+ "\n\t" + getCourseLoadSummary(courses.iterator(), false);
+			+ "\n" + getCourseLoadSummary(courses.iterator(), false);
 		}
 		
 		return string;
@@ -86,8 +90,8 @@ public class Student extends UserAccount {
 	}
 	
 	public void displayCourses() {
-		String string = "Taking Courses:"
-				+ "\n\t" + getCourseLoadSummary(courses.iterator(), false);
+		String string = firstName + " " + lastName + " Taking Courses:"
+				+ "\n" + getCourseLoadSummary(courses.iterator(), false);
 		
 		System.out.println(string);
 	}
@@ -102,7 +106,7 @@ public class Student extends UserAccount {
 		
 		// Handle case: no courses in list.
 		if (!courseIterator.hasNext()) {
-			return "None";
+			return "\tNone";
 		}
 		
 		String string = "";
@@ -113,7 +117,8 @@ public class Student extends UserAccount {
 			
 			// append user details at specified level.
 			string = string
-				+ "\t" + course.getDetails(fullDetails)
+				+ "\t" + "-".repeat(10)
+				+ "\n\t" + course.getDetails(fullDetails)
 				+ "\tGrade:\t" + course.getStudentGrade(this, true)
 				+ "\n";
 		}
@@ -155,7 +160,7 @@ public class Student extends UserAccount {
 			
 		}
 		
-		return (double) (qualityPoints / coursesTaken);
+		return (double) (qualityPoints / (coursesTaken*3));
 		
 	}
 	

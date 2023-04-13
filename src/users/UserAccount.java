@@ -56,8 +56,8 @@ public abstract class UserAccount {
 	protected String getQuickInfo() {
 		String string = ""
 				+ "Name: \t" + firstName + " " 
-					+ middleName.length() == null ?  lastName : 
-						middleName + " " + lastName 
+					+ ( middleName.length() == 0 ?  lastName : 
+						middleName + " " + lastName) 
 				+ "\n\tId: \t" + id
 				+ "\n";
 				
@@ -129,7 +129,8 @@ public abstract class UserAccount {
 		
 		// Handle case: no accounts in list.
 		if (!accountIterator.hasNext()) {
-			return "None";
+			return "\t" + "-".repeat(10)
+					+ "\n\tNone";
 		}
 		
 		String string = "";
@@ -140,7 +141,8 @@ public abstract class UserAccount {
 			
 			// append user details at specified level.
 			string = string
-				+ "\t" + account.getAccountDetails(fullDetails);
+				+ "\t" + "-".repeat(10)
+				+ "\n\t" + account.getAccountDetails(fullDetails);
 		}
 		
 		return string;
@@ -151,7 +153,8 @@ public abstract class UserAccount {
 		
 		// Handle case: no courses in list.
 		if (!courseIterator.hasNext()) {
-			return "None";
+			return "\t" + "-".repeat(10)
+					+ "\n\tNone";
 		}
 		
 		String string = "";
@@ -162,7 +165,8 @@ public abstract class UserAccount {
 			
 			// append user details at specified level.
 			string = string
-				+ "\t" + course.getDetails(fullDetails);
+				+ "\t" + "-".repeat(10)
+				+ "\n\t" + course.getDetails(fullDetails);
 		}
 		
 		return string;
