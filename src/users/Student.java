@@ -18,7 +18,7 @@ public class Student extends UserAccount {
 			String id, Integer age, String phoneNumber) {
 		super(firstName, middleName, lastName, id, age, phoneNumber);
 		
-		this.gpa = 0;
+		this.gpa = 0.00;
 		
 		this.courses = new ArrayList<>();
 		this.cm = CourseManager.getInstance();
