@@ -126,6 +126,12 @@ public abstract class UserAccount {
 //	Utility functions
 //	
 	protected String getMultiAccountDetails(Iterator<UserAccount> accountIterator, Boolean fullDetails) {
+		
+		// Handle case: no accounts in list.
+		if (!accountIterator.hasNext()) {
+			return "None";
+		}
+		
 		String string = "";
 		
 		// cycle through passed accounts.
@@ -142,6 +148,12 @@ public abstract class UserAccount {
 	}
 	
 	protected String getCourseLoadSummary(Iterator<Course> courseIterator, Boolean fullDetails) {
+		
+		// Handle case: no courses in list.
+		if (!courseIterator.hasNext()) {
+			return "None";
+		}
+		
 		String string = "";
 				
 		// cycle through passed courses.
