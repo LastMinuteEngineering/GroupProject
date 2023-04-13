@@ -28,7 +28,7 @@ public class Staff extends UserAccount {
 		
 		if (fullDetails) {
 			string = string
-			+ "\tSupervisor:\t\n" + (supervisor == null ? "None\n": supervisor.getAccountDetails(fullDetails))
+			+ "\tSupervisor:\t\n" + (supervisor == null ? "None\n": supervisor.getAccountDetails(false))
 			+ "\tSubordinates:"
 			+ "\n\t" + getMultiAccountDetails(subordinates.iterator(), false)
 			+ "\n";
