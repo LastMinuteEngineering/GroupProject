@@ -2,8 +2,8 @@ package common.types;
 
 public class Content {
 
-	public String label;
-	public String input;
+	private String label;
+	private String input;
 	
 	public Content(String label, String input) {
 		this.label = label;
