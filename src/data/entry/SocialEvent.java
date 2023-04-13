@@ -12,9 +12,7 @@ public class SocialEvent extends Entry {
 	private DateTime eventDateTime;
 	
 	public SocialEvent(String id, String creation) {
-		this.id = id;
-		this.creation = creation;
-		this.title = "";
+		super(id, creation);
 		
 		this.status = EntryStatus.Upcoming;
 		

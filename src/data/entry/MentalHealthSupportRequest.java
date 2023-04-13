@@ -9,9 +9,7 @@ public class MentalHealthSupportRequest extends Entry {
 	private Content details;
 	
 	public MentalHealthSupportRequest(String id, String creation) {
-		this.id = id;
-		this.creation = creation;
-		this.title = "";
+		super(id, creation);
 		
 		this.status = EntryStatus.Open;
 		this.requestUrgency = Urgency.High;	

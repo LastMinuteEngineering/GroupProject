@@ -7,15 +7,31 @@ import common.types.CustomEnums.*;
 import data.entry.Entry;
 import data.entry.EntryFactory;
 import data.storage.Storage;
+import data.course.Course;
 
 public abstract class UserAccount {
 	
-	protected Integer age;
 	protected String firstName, middleName, lastName;
 	protected String id;
+	protected Integer age;
 	protected String phoneNumber;
 	protected AccessLevel accessLevel;
+	// avoid having to import array list unnecessarily.
 	protected ArrayList<String> entryIds;
+	
+	// common among all user accounts.
+	public UserAccount(String firstName, String middleName, String lastName,
+			String id, Integer age, String phoneNumber) {
+		
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.id = id;
+		this.age = age;
+		this.phoneNumber = phoneNumber;
+		this.accessLevel = AccessLevel.Standard;
+		this.entryIds = new ArrayList<>();
+	}
 	
 //
 //	User Account functions
@@ -105,6 +121,41 @@ public abstract class UserAccount {
 	public Boolean confirmAccess(AccessLevel minAccess) {
 		return accessLevel.compareTo(minAccess) >= 0;
 	};
+	
+// 
+//	Utility functions
+//	
+	protected String getMultiAccountDetails(Iterator<UserAccount> accountIterator, Boolean fullDetails) {
+		String string = "";
+		
+		// cycle through passed accounts.
+		while(accountIterator.hasNext()) {
+			UserAccount account = accountIterator.next();
+			
+			// append user details at specified level.
+			string = string
+				+ "\t" + account.getAccountDetails(fullDetails);
+		}
+		
+		return string;
+		
+	}
+	
+	protected String getCourseLoadSummary(Iterator<Course> courseIterator, Boolean fullDetails) {
+		String string = "";
+				
+		// cycle through passed courses.
+		while(courseIterator.hasNext()) {
+			Course course = courseIterator.next();
+			
+			// append user details at specified level.
+			string = string
+				+ "\t" + course.getDetails(fullDetails);
+		}
+		
+		return string;
+				
+	}
 	
 	
 	

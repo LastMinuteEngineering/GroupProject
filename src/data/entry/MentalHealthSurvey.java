@@ -13,10 +13,8 @@ public class MentalHealthSurvey extends Entry {
 	private ArrayList<Content> modifiedContent;
 	
 	public MentalHealthSurvey(String id, String creation) {
-		this.id = id;
-		this.creation = creation;
+		super(id, creation);
 		
-		this.title = "";
 		this.status = EntryStatus.Open;
 		this.responses = 0;
 		

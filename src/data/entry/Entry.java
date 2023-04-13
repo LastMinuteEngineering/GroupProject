@@ -16,9 +16,18 @@ public abstract class Entry {
 	protected EntryStatus status;
 	protected String creation;
 	// avoid having to import ArrayList lib in every entry.
-	protected ArrayList<Content> content = new ArrayList<>();
+	protected ArrayList<Content> content;
 	
 	protected Scanner input = new Scanner (System.in);
+	
+	public Entry(String id, String creation) {
+		// common among all entry instances
+		this.id = id;
+		this.creation = creation;
+		this.title = "";
+		
+		content = new ArrayList<>();
+	}
 
 //
 //  Abstract functions

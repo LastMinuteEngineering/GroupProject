@@ -17,10 +17,8 @@ public class HealthIssueReport extends Entry {
 	private ArrayList<Entry> replies;
 	
 	public HealthIssueReport(String id, String creation) {
-		this.id = id;
-		this.creation = creation;
+		super(id, creation);
 		
-		this.title = "";
 		this.status = EntryStatus.Open;
 		this.urgency = Urgency.Medium;
 		

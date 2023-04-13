@@ -18,10 +18,8 @@ public class DiscussionPost extends Entry {
 	private EntryFactory factory;
 	
 	public DiscussionPost(String id, String creation) {
-		this.id = id;
-		this.creation = creation;
+		super(id, creation);
 		
-		this.title = "";
 		this.status = EntryStatus.Open;
 		this.likes = 0;
 		

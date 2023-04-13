@@ -10,11 +10,10 @@ public class Reply extends Entry {
 	private Content reply;
 	
 	public Reply(String id, String creation, Entry parent) {
-		this.id = id;
-		this.creation = creation;
-		this.parent = parent;
+		super(id, creation);
 		
-		this.title = "";
+		this.parent = parent;
+	
 		this.status = EntryStatus.Unreviewed;
 		this.likes = 0;
 		
