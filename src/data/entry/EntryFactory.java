@@ -42,6 +42,9 @@ public class EntryFactory {
 							  		
 		case MentalHealthSupportRequest : 	entry = createMentalHealthSupportRequest();
 											break;
+		
+		case MentalHealthSurvey : 	entry = createMentalHealthSurvey();
+									break;
 											
 		case Reply: 				entry = null;
 									System.out.println(module + "No parent entry; cancelling operation.");
@@ -91,6 +94,10 @@ public class EntryFactory {
 	private Entry createMentalHealthSupportRequest() {
 		return new MentalHealthSupportRequest(getId(), getTimeStamp());
 	};
+	
+	private Entry createMentalHealthSurvey() {
+		return new MentalHealthSurvey(getId(), getTimeStamp());
+	}
 	
 	
 //

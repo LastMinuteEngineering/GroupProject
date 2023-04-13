@@ -10,6 +10,7 @@ public class CustomEnums {
 		SocialEvent("Social Event"),
 		Reply("Reply"),
 		MentalHealthSupportRequest("Mental Health Support Request"),
+		MentalHealthSurvey("Mental Health Survey"),
 		Invalid("Invalid");
 		
 		public final String description;
@@ -36,6 +37,9 @@ public class CustomEnums {
 													break;
 													
 			case "Mental Health Support Request" : 	type =  EntryType.MentalHealthSupportRequest;	
+													break;
+			
+			case "Mental Health Survey" : 			type =  EntryType.MentalHealthSurvey;	
 													break;
 													
 			default :								type = EntryType.Invalid;
