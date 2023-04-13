@@ -11,6 +11,7 @@ public class EntryFactory {
 	private static EntryFactory instance;
 	private Integer entryCount = 0;
 	private Storage db;
+	private String module = "EntryFactory:\t";
 
 	private EntryFactory() {
 		db = Storage.getInstance();
@@ -29,37 +30,67 @@ public class EntryFactory {
 		Entry entry;
 
 		// Call proper method based on type.
-//		switch type:
-//			createEntryType()
+		switch (type) {
+		case HealthIssueReport :	entry = createHealthIssueReport();
+								 	break;
+								 	
+		case SocialEvent : 			entry = createSocialEvent();
+						   			break;
+						   			
+		case DiscussionPost : 		entry = createDiscussionPost();
+							  		break;
+							  		
+		case MentalHealthSupportRequest : 	entry = createMentalHealthSupportRequest();
+											break;
+											
+		case Reply: 				entry = null;
+									System.out.println(module + "No parent entry; cancelling operation.");
+									break;
+									
+		default : 					entry = null;
+									System.out.println(module + "Invalid type; cancelling operation.");
+									break;
+		}
+			
 		
 		// add to storage.
 		db.addEntry(entry);
 
 		return entry;
 	};
+	
+	// overloaded to create replies with parent entries.
+	public Entry createEntry(EntryType type, Entry parent) {
+		Entry entry = createReply(parent);
 
-	// TODO
+		// add to Storage
+		db.addEntry(entry);
+
+		return entry;
+	}
+	
+	
+	
 	private Entry createHealthIssueReport() {
-		
 		return new HealthIssueReport(getId(), getTimeStamp());
-		
 	};
 
-//	private Entry createSocialEvent() {
-//	
-//	};
+	private Entry createSocialEvent() {
+		return new SocialEvent(getId(), getTimeStamp());
+	};
 
-//	private Entry createDiscussionPost() {
-//	
-//	};
+	private Entry createDiscussionPost() {
+		return new DiscussionPost(getId(), getTimeStamp());
+	};
+	
+	private Entry createReply(Entry parent) {
+		return new Reply(getId(), getTimeStamp(), parent);
 
-//	private Entry createDiscussionPostReply() {
-//	
-//	};
-
-//	private Entry createMentalHealthSupportRequest() {
-//	
-//	};
+	};
+	
+	private Entry createMentalHealthSupportRequest() {
+		return new MentalHealthSupportRequest(getId(), getTimeStamp());
+	};
 	
 	
 //

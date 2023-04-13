@@ -1,6 +1,6 @@
 package common.types;
 
-public class IssueLocation {
+public class Location {
 	
 	public String street;
 	public String city;
@@ -10,7 +10,7 @@ public class IssueLocation {
 	public String room;
 	public String other;
 	
-	public IssueLocation(String street, String city, String state, String zip, String building, String room, String other) {
+	public Location(String street, String city, String state, String zip, String building, String room, String other) {
 		this.street = street;
 		this.city = city;
 		this.state = state;
@@ -22,8 +22,8 @@ public class IssueLocation {
 	
 	public String toString() {
 		// returns string of format : "street, city, state, zip
-		//							   building, room
-		//                             other"
+		//							   		building, room
+		//                             		other"
 		String string = ""
 				+ street + ", " + city+ ", " + state+ ", " + zip
 				+"\n\t" + building + ", " + room

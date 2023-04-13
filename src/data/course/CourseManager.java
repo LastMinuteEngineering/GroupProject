@@ -8,7 +8,7 @@ public class CourseManager {
 	
 	private static CourseManager instance;
 	
-	protected HashMap<String, HashMap<Integer, Course> > courses;
+	protected HashMap<String, HashMap<String, Course> > courses;
 	private String module = "CourseManager:\t";
 	
 	private CourseManager() {
@@ -24,7 +24,7 @@ public class CourseManager {
 		return instance;
 	}
 	
-	public void addCourse(String prefix, Integer numb, String name, Integer capacity) {
+	public void addCourse(String prefix, String numb, String name, Integer capacity) {
 		
 		// Determine if course already exists.
 		if (getCourse(prefix, numb) != null) {
@@ -33,13 +33,13 @@ public class CourseManager {
 			return;
 		}
 		
-		HashMap<Integer, Course> subjectCourses = courses.getOrDefault(prefix, null);
+		HashMap<String, Course> subjectCourses = courses.getOrDefault(prefix, null);
 	
 		// create course.
 		Course course = new Course(prefix, numb, name, capacity);
 		if (subjectCourses == null) {
 			// create subject course map
-			subjectCourses = new HashMap<Integer, Course>();
+			subjectCourses = new HashMap<String, Course>();
 			courses.put(prefix, subjectCourses);			
 		}
 		
@@ -49,10 +49,10 @@ public class CourseManager {
 		
 	}
 	
-	public Course getCourse(String prefix, Integer numb) {
+	public Course getCourse(String prefix, String numb) {
 		
 		// Determine if course exists.
-		HashMap<Integer, Course> subjectCourses = courses.getOrDefault(prefix, null);
+		HashMap<String, Course> subjectCourses = courses.getOrDefault(prefix, null);
 		if ((subjectCourses == null) || (subjectCourses.getOrDefault(numb, null) == null) ) {
 			System.out.println(module+ "Course does not exist." );
 			return null;
@@ -64,13 +64,13 @@ public class CourseManager {
 	public void displayAvailableCourses() {
 		
 		// iterate over all available subject prefixes.
-		Iterator<Entry<String, HashMap<Integer, Course>>> allCourseIterator = courses.entrySet().iterator();
+		Iterator<Entry<String, HashMap<String, Course>>> allCourseIterator = courses.entrySet().iterator();
 		
 		while (allCourseIterator.hasNext()) {
-			HashMap<Integer, Course> subjectCourses = allCourseIterator.next().getValue(); 
+			HashMap<String, Course> subjectCourses = allCourseIterator.next().getValue(); 
 			
 			// iterate over all courses in subject prefix.
-			Iterator<Entry<Integer, Course>> courseIterator = subjectCourses.entrySet().iterator();
+			Iterator<Entry<String, Course>> courseIterator = subjectCourses.entrySet().iterator();
 	
 			while (courseIterator.hasNext()) {
 				

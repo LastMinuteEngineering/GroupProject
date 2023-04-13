@@ -1,6 +1,8 @@
 package common.types;
 
 public class CustomEnums {
+	
+	private static String module = "CustomEnums:\t";
 
 	public enum EntryType{
 		HealthIssueReport("Health Issue Report"),
@@ -17,16 +19,30 @@ public class CustomEnums {
 		}
 		
 		public static EntryType toEnum(String description) {
+			EntryType type;
+			
 			switch (description) {
-			case "Health Issue Report" : return EntryType.HealthIssueReport;
-			case "Social Event" : return EntryType.SocialEvent;			
-			case "Discussion Post" : return EntryType.DiscussionPost;
-			case "Reply" : return EntryType.Reply;
-			case "Mental Health Support Request" : return EntryType.MentalHealthSupportRequest;			
+			case "Health Issue Report" : 			type = EntryType.HealthIssueReport;
+													break;
+													
+			case "Social Event" : 					type = EntryType.SocialEvent;	
+													break;
+			
+			case "Discussion Post" : 				type = EntryType.DiscussionPost;
+													break;
+
+			case "Reply" : 							type =  EntryType.Reply;
+													break;
+													
+			case "Mental Health Support Request" : 	type =  EntryType.MentalHealthSupportRequest;	
+													break;
+													
+			default :								type = null;
+													System.out.println(module + "Invalid identifier.");
+													break;
 			}
 			
-			// return Reply as default
-			return EntryType.Reply;
+			return type;
 		}
 
 	}
@@ -44,14 +60,24 @@ public class CustomEnums {
 		}
 		
 		public static AccessLevel toEnum(String description) {
+			AccessLevel type;
+			
 			switch (description) {
-			case "Standard Access" : return AccessLevel.Standard;
-			case "Elevated Access" : return AccessLevel.Elevated;
-			case "Admin Access" : return AccessLevel.Admin;
+			case "Standard Access" : 	type = AccessLevel.Standard;
+										break;
+										
+			case "Elevated Access" : 	type = AccessLevel.Elevated;
+										break;
+										
+			case "Admin Access" : 		type = AccessLevel.Admin;
+										break;
+										
+			default :					type = null;
+										System.out.println(module + "Invalid identifier.");
+										break;
 			}
 			
-			// return Standard as default
-			return AccessLevel.Standard;
+			return type;
 		}
 		
 	}
@@ -62,7 +88,10 @@ public class CustomEnums {
 		Completed("Completed"),
 		Closed("Closed"),
 		Upcoming("Upcoming"),
-		Passed("Passed");
+		Passed("Passed"),
+		Unreviewed("Waiting For Review"),
+		Refused("Not Accepted"),
+		Accepted("Accepted");
 		
 		public final String description;
 		
@@ -72,17 +101,42 @@ public class CustomEnums {
 		}
 		
 		public static EntryStatus toEnum(String description) {
+			EntryStatus type;
+			
 			switch (description) {
-			case "Opened" : return EntryStatus.Open;
-			case "In Progress" : return EntryStatus.InProgress;
-			case "Completed" : return EntryStatus.Completed;
-			case "Closed" : return EntryStatus.Closed;
-			case "Upcoming" : return EntryStatus.Upcoming;
-			case "Passed" : return EntryStatus.Passed;
+			case "Opened" : 			type = EntryStatus.Open;
+										break;
+										
+			case "In Progress" : 		type = EntryStatus.InProgress;
+										break;
+										
+			case "Completed" : 			type = EntryStatus.Completed;
+										break;
+										
+			case "Closed" : 			type = EntryStatus.Closed;
+										break;
+										
+			case "Upcoming" : 			type = EntryStatus.Upcoming;
+										break;
+										
+			case "Passed" : 			type = EntryStatus.Passed;
+										break;
+										
+			case "Waiting For Review" : type = EntryStatus.Unreviewed;
+										break;
+										
+			case "Not Accepted" : 		type = EntryStatus.Refused;
+										break;
+										
+			case "Accepted" : 			type = EntryStatus.Accepted;
+										break;
+										
+			default :					type = null;
+										System.out.println(module + "Invalid identifier.");
+										break;
 			}
 			
-			// return Open as default
-			return EntryStatus.Open;
+			return type;
 		}
 	}
 	
@@ -100,17 +154,30 @@ public class CustomEnums {
 		}
 		
 		public static Urgency toEnum(String description) {
+			
+			Urgency type;
 			switch (description) {
-			case "Low Priority" : return Urgency.Low;
-			case "Medium Priority" : return Urgency.Medium;
-			case "High Priority" : return Urgency.High;
-			case "Critical Priority" : return Urgency.Critical;
+			case "Low Priority" : 		type = Urgency.Low;
+										break;
+										
+			case "Medium Priority" : 	type = Urgency.Medium;
+										break;
+										
+			case "High Priority" : 		type = Urgency.High;
+										break;
+										
+			case "Critical Priority" : 	type = Urgency.Critical;
+										break;
+										
+			default :					type = null;
+										System.out.println(module + "Invalid identifier.");
+										break;
 			}
 			
-			// return Low as default
-			return Urgency.Low;
+			return type;
 		}
 	}
+	
 	
 	
 }

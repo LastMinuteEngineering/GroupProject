@@ -11,7 +11,7 @@ import users.UserAccount;
 public class Course {
 	
 	private String prefix;
-	private Integer numb;
+	private String numb;
 	private String name;
 	private Integer capacity;
 	private HashMap<UserAccount, Grade> students;
@@ -19,7 +19,7 @@ public class Course {
 	
 	private static String module; 
 	
-	public Course(String prefix, Integer numb, String name, Integer capacity) {
+	public Course(String prefix, String numb, String name, Integer capacity) {
 		this.prefix = prefix;
 		this.numb = numb;
 		this.name = name;

@@ -12,10 +12,11 @@ import common.types.CustomEnums.*;
 public abstract class Entry {
 	
 	protected String id;
-	protected String title = "";
+	protected String title;
 	protected EntryStatus status;
 	protected String creation;
-	protected ArrayList<Content> content = new ArrayList<>();;
+	// avoid having to import ArrayList lib in every entry.
+	protected ArrayList<Content> content = new ArrayList<>();
 	
 	protected Scanner input = new Scanner (System.in);
 
@@ -84,11 +85,11 @@ public abstract class Entry {
 		// prompt user based on data; if toModify has data, display it and prompt user.
 		if (toModify.length() == 0) {
 			System.out.println(
-					"Stored " + label + ":"
+					"Stored " + label.toLowerCase() + ":"
 					+ "\n" + toModify
-					+ "\nEnter new " + label + " or leave blank and press enter to keep stored " + label + ":" );
+					+ "\nEnter " + label.toLowerCase() + " or leave blank and press enter to keep stored " + label.toLowerCase() + ":" );
 		}else {
-			System.out.println("Enter new " + label + ":");
+			System.out.println("Enter new " + label.toLowerCase() + ":");
 		}
 		
 		String response = input.nextLine();
@@ -107,12 +108,12 @@ public abstract class Entry {
 		// prompt user based on data; if toModify has data, display it and prompt user.
 		if (toModify.length() == 0) {
 			System.out.println(
-					"Stored " + label + ":"
+					"Stored " + label.toLowerCase() + ":"
 					+ "\n" + toModify
-					+ "\nEnter new " + label + " (allowable values: " + listToString(allowableValues) + ")"
-							+ " or leave blank and press enter to keep stored " + label + ":" );
+					+ "\nEnter new " + label.toLowerCase() + " (allowable values: " + listToString(allowableValues) + ")"
+							+ " or leave blank and press enter to keep stored " + label.toLowerCase() + ":" );
 		}else {
-			System.out.println("Enter new " + label + " (allowable values: " + listToString(allowableValues) + ") :");
+			System.out.println("Enter new " + label.toLowerCase() + " (allowable values: " + listToString(allowableValues) + ") :");
 		}
 		
 		String response = input.nextLine();
@@ -124,13 +125,29 @@ public abstract class Entry {
 			
 			// Loop while user input does not match one of the expected vals.
 			while(!stringContainsItemFromList(response, allowableValues)) {
-				System.out.println( response + " is not a valid " + label + ". Please try again (allowable values: " + listToString(allowableValues) + ") :");
+				System.out.println( response + " is not a valid " + label.toLowerCase() + ". Please try again (allowable values: " + listToString(allowableValues) + ") :");
 				response = input.nextLine();
 			}
 		}
 		
 		return toModify;
 	};
+	
+	protected Boolean makeNewContent() {
+		// prompt user for more content.
+		System.out.println("Add more content? (y/n)");
+		
+		String response = input.nextLine();
+		
+		// loop while answer is not yes/no or similar.
+		while(!stringContainsItemFromList(response, new String[] {"Y", "y", "Yes", "yes", "N", "n", "No", "no"})) {
+			System.out.println( "Please enter yes, y, no, or n):");
+			response = input.nextLine();
+		}
+		
+		// return true if user replied y/yes.
+		return stringContainsItemFromList(response, new String[] {"Y", "y", "Yes", "yes"});
+	}
 	
 	private String listToString(String[] values){
 		// return array vals as string : "val1, val2, ..., valN"

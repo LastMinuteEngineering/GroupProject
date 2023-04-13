@@ -1,22 +1,33 @@
 package data.entry;
 
+import java.util.Iterator;
+import java.util.ArrayList;
+
 import common.types.CustomEnums.*;
-import common.types.IssueLocation;
+import common.types.Location;
 import common.types.Content;
+
 
 public class HealthIssueReport extends Entry {
 	
-	private IssueLocation issueLocation;
+	private Location issueLocation;
 	private Content description;
 	private Urgency urgency;
+	private EntryFactory factory;
+	private ArrayList<Entry> replies;
 	
 	public HealthIssueReport(String id, String creation) {
 		this.id = id;
 		this.creation = creation;
 		
-		description = new Content("description", "");
-		this.issueLocation = new IssueLocation("","","","","","","");
+		this.title = "";
+		this.status = EntryStatus.Open;
 		this.urgency = Urgency.Medium;
+		
+		this.description = new Content("Issue Description", "");
+		this.issueLocation = new Location("","","","","","","");
+		this.replies = new ArrayList<>();
+		this.factory = EntryFactory.getInstance();
 		
 	}
 
@@ -24,21 +35,24 @@ public class HealthIssueReport extends Entry {
 	public void promptForDetails() {
 		
 		// title of issue
-		title = modifyVariable(this.title, "title");
+		title = modifyVariable(this.title, "issue title");
 		
 		// status of issue; converts string back to enum.
-		status = EntryStatus.toEnum(modifyVariable(status.description, "staus", new String[] {
+		status = EntryStatus.toEnum(modifyVariable(status.description, "issue status", new String[] {
 			EntryStatus.Open.description,
 			EntryStatus.InProgress.description,
 			EntryStatus.Completed.description,
-			EntryStatus.Closed.description
+			EntryStatus.Closed.description,
+			EntryStatus.Unreviewed.description,
+			EntryStatus.Accepted.description,
+			EntryStatus.Refused.description
 		}));
 		
 		// description of issue.
 		description.input = modifyVariable(description.input, description.label);
 		content.add(description);
 		
-		// location of issue
+		// location of issue.
 		issueLocation.street = modifyVariable(issueLocation.street, "street");
 		issueLocation.zip = modifyVariable(issueLocation.zip, "zipcode");
 		issueLocation.building = modifyVariable(issueLocation.building, "building");
@@ -46,7 +60,7 @@ public class HealthIssueReport extends Entry {
 		issueLocation.other = modifyVariable(issueLocation.other, "extra details");
 		
 		// urgency of the issue; converts string back to enum.
-		urgency = Urgency.toEnum(modifyVariable(urgency.description, "urgency", new String[] {
+		urgency = Urgency.toEnum(modifyVariable(urgency.description, "issue urgency", new String[] {
 				Urgency.Low.description,
 				Urgency.Medium.description,
 				Urgency.High.description,
@@ -62,11 +76,34 @@ public class HealthIssueReport extends Entry {
 		String string = getBaseInfo();
 		if (fullDetails) {
 				string = string
-				+ "\n\tIssue Location: \n\t" + issueLocation.toString()
-				+ "\n\tUrgency: \t" + urgency.description
-				+ "\n" + getContent();
-			}
+				+ "\tIssue Location: \n\t" + issueLocation.toString()
+				+ "\n\tIssue Urgency: \t" + urgency.description
+				+ "\n" + getContent()+ 
+				"\tReplies:\n" + getReplyDetails(true) ;
+		}else {
+			// get replies in short form.
+			string = string 
+			+ "\n\tReplies:\n" + getReplyDetails(false) ;
+		}
 				
+		return string;
+	}
+	
+	public void addReply() {
+		Entry reply = factory.createEntry(EntryType.Reply, this);
+		replies.add(reply);
+	}
+	
+	// Utility functions
+	private String getReplyDetails(Boolean fullDetails) {
+		String string = ""; 
+		Iterator<Entry> replyIterator = replies.iterator();
+		while(replyIterator.hasNext()) {
+			Entry reply = replyIterator.next();
+			string = string
+			+ "\t" + reply.getDetails(fullDetails);
+		}
+		
 		return string;
 	}
 
