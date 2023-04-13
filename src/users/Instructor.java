@@ -63,5 +63,11 @@ public class Instructor extends UserAccount {
 	public ArrayList<Course> getCourses(){
 		return courses;
 	}
-
+	
+	public void displayCourses() {
+		String string = "Teaching Courses:"
+				+ "\n\t" + getCourseLoadSummary(courses.iterator(), false);
+		
+		System.out.println(string);
+	}
 }
