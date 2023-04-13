@@ -64,7 +64,7 @@ public abstract class UserAccount {
 	
 	public void displayAllEntries() {
 		// display all entries with without all details.
-		System.out.println(firstName+"'s Entries \n");
+		System.out.println(firstName+"'s Entries \n\t");
 		
 		Iterator<String> entryIdIterator = entryIds.iterator();
 		while(entryIdIterator.hasNext()) {

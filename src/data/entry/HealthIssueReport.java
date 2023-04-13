@@ -29,6 +29,8 @@ public class HealthIssueReport extends Entry {
 		this.replies = new ArrayList<>();
 		this.factory = EntryFactory.getInstance();
 		
+		content.add(description);
+		
 	}
 
 	@Override
@@ -48,10 +50,6 @@ public class HealthIssueReport extends Entry {
 			EntryStatus.Refused.description
 		}));
 		
-		// description of issue.
-		description.input = modifyVariable(description.input, description.label);
-		content.add(description);
-		
 		// location of issue.
 		issueLocation.street = modifyVariable(issueLocation.street, "street");
 		issueLocation.zip = modifyVariable(issueLocation.zip, "zipcode");
@@ -66,6 +64,9 @@ public class HealthIssueReport extends Entry {
 				Urgency.High.description,
 				Urgency.Critical.description
 		}));
+		
+		// prompt user to modify all content contained in the Entry.
+		modifyContent();
 		
 		
 	}

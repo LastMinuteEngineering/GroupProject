@@ -29,6 +29,8 @@ public class DiscussionPost extends Entry {
 		this.replies = new ArrayList<>();
 		this.cm = CourseManager.getInstance();
 		this.factory = EntryFactory.getInstance();
+		
+		content.add(description);
 	}
 	
 	
@@ -44,10 +46,6 @@ public class DiscussionPost extends Entry {
 			EntryStatus.Closed.description
 		}));
 		
-		// description of discussion.
-		description.input = modifyVariable(description.input, description.label);
-		content.add(description);
-		
 		// associate course to discussion.
 		do {
 			String coursePrefix = "";
@@ -58,6 +56,9 @@ public class DiscussionPost extends Entry {
 			course = cm.getCourse(coursePrefix, courseNumb);
 			
 		}while (course == null);
+		
+		// prompt user to modify all content contained in the Entry.
+		modifyContent();
 		
 	}
 

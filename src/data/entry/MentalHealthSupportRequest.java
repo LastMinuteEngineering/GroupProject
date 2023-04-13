@@ -17,6 +17,8 @@ public class MentalHealthSupportRequest extends Entry {
 		this.requestUrgency = Urgency.High;	
 		
 		this.details = new Content("Request details", "");
+		
+		content.add(details);
 	}
 
 	@Override
@@ -34,10 +36,6 @@ public class MentalHealthSupportRequest extends Entry {
 			EntryStatus.Accepted.description
 		}));
 		
-		// description of request.
-		details.input = modifyVariable(details.input, details.label);
-		content.add(details);
-		
 		// urgency of the request; converts string back to enum.
 		requestUrgency = Urgency.toEnum(modifyVariable(requestUrgency.description, "request urgency", new String[] {
 				Urgency.Low.description,
@@ -45,6 +43,9 @@ public class MentalHealthSupportRequest extends Entry {
 				Urgency.High.description,
 				Urgency.Critical.description
 		}));
+		
+		// prompt user to modify all content contained in the Entry.
+		modifyContent();
 				
 		// prompt user for more content.
 		while(makeNewContent()) {

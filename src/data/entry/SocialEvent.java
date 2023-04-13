@@ -22,6 +22,8 @@ public class SocialEvent extends Entry {
 		this.eventLocation = new Location("","","","","","","");
 		this.eventDateTime = new DateTime("","");
 		
+		content.add(description);
+		
 	}
 
 	@Override
@@ -36,9 +38,6 @@ public class SocialEvent extends Entry {
 			EntryStatus.Passed.description
 		}));
 		
-		// description of event.
-		description.input = modifyVariable(description.input, description.label);
-		content.add(description);
 		
 		// date & time of the event; suggested format not enforced.
 		eventDateTime.date = modifyVariable(eventDateTime.date, "event date (mm-dd-yy)");
@@ -50,6 +49,9 @@ public class SocialEvent extends Entry {
 		eventLocation.building = modifyVariable(eventLocation.building, "building");
 		eventLocation.room = modifyVariable(eventLocation.room, "room number");
 		eventLocation.other = modifyVariable(eventLocation.other, "extra details");
+		
+		// prompt user to modify all content contained in the Entry.
+		modifyContent();
 		
 		// prompt user for more content.
 		while(makeNewContent()) {

@@ -19,16 +19,17 @@ public class Reply extends Entry {
 		this.likes = 0;
 		
 		this.reply = new Content("Relpy Content", "");
+		
+		content.add(reply);
 	};
 
 	@Override
 	public void promptForDetails() {
-		// title of discussion.
+		// title of reply.
 		title = modifyVariable(this.title, "discussion title");
 		
-		// description of discussion.
-		reply.input = modifyVariable(reply.input, reply.label);
-		content.add(reply);
+		// prompt user to modify all content contained in the Entry.
+		modifyContent();
 
 	}
 

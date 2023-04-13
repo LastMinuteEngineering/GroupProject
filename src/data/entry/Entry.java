@@ -133,6 +133,22 @@ public abstract class Entry {
 		return toModify;
 	};
 	
+	protected void modifyContent() {
+		Iterator<Content> contentIterator = content.iterator();
+		// first member of content is required and instantiated in Entry constructor. 
+		// User Cannot change label.
+		Content required = contentIterator.next();
+		required.input = modifyVariable(required.input, required.label);
+		
+		// handle remaining normally.
+		while(contentIterator.hasNext()) {
+			Content other = contentIterator.next();
+			other.label = modifyVariable(required.label, "label");
+			other.input = modifyVariable(required.input, "content");
+		}
+		
+	}
+	
 	protected Boolean makeNewContent() {
 		// prompt user for more content.
 		System.out.println("Add more content? (y/n)");
