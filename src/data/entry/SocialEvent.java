@@ -53,14 +53,8 @@ public class SocialEvent extends Entry {
 		// prompt user to modify all content contained in the Entry.
 		modifyContent();
 		
-		// prompt user for more content.
-		while(makeNewContent()) {
-			// make new content, get label and input.
-			Content newContent = new Content("","");
-			newContent.label = modifyVariable(newContent.label, "label");
-			newContent.input = modifyVariable(newContent.input, "content");
-			content.add(newContent);
-		}
+		// prompt user for new Content.
+		addNewContent();
 		
 
 	}
@@ -68,7 +62,7 @@ public class SocialEvent extends Entry {
 	@Override
 	public String getDetails(Boolean fullDetails) {
 		
-		String string = getBaseInfo();
+		String string = getQuickInfo();
 		if (fullDetails) {
 				string = string
 				+ "\tEvent Date and Time: \t" + eventDateTime.toString()

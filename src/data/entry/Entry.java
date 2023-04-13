@@ -42,14 +42,7 @@ public abstract class Entry {
 		System.out.println(string);
 	};
 	
-	protected String getBaseInfo() {
-		
-		String string = getQuickInfo()
-		+ "\n\tCreation: \t" + creation
-		+ "\n";
-		
-		return string;
-	};
+
 	
 	protected String getContent() {
 		String string = "";
@@ -72,6 +65,7 @@ public abstract class Entry {
 				+ "Title: \t" + title
 				+ "\n\tID: \t" + id
 				+ "\n\tStatus: \t" + status.description
+				+ "\n\tCreation: \t" + creation
 				+ "\n";
 				
 		return string;
@@ -89,7 +83,7 @@ public abstract class Entry {
 					+ "\n" + toModify
 					+ "\nEnter " + label.toLowerCase() + " or leave blank and press enter to keep stored " + label.toLowerCase() + ":" );
 		}else {
-			System.out.println("Enter new " + label.toLowerCase() + ":");
+			System.out.println("Enter " + label.toLowerCase() + ":");
 		}
 		
 		String response = input.nextLine();
@@ -110,10 +104,10 @@ public abstract class Entry {
 			System.out.println(
 					"Stored " + label.toLowerCase() + ":"
 					+ "\n" + toModify
-					+ "\nEnter new " + label.toLowerCase() + " (allowable values: " + listToString(allowableValues) + ")"
+					+ "\nEnter " + label.toLowerCase() + " (allowable values: " + listToString(allowableValues) + ")"
 							+ " or leave blank and press enter to keep stored " + label.toLowerCase() + ":" );
 		}else {
-			System.out.println("Enter new " + label.toLowerCase() + " (allowable values: " + listToString(allowableValues) + ") :");
+			System.out.println("Enter " + label.toLowerCase() + " (allowable values: " + listToString(allowableValues) + ") :");
 		}
 		
 		String response = input.nextLine();
@@ -149,7 +143,7 @@ public abstract class Entry {
 		
 	}
 	
-	protected Boolean makeNewContent() {
+	protected Boolean addContent() {
 		// prompt user for more content.
 		System.out.println("Add more content? (y/n)");
 		
@@ -163,6 +157,18 @@ public abstract class Entry {
 		
 		// return true if user replied y/yes.
 		return stringContainsItemFromList(response, new String[] {"Y", "y", "Yes", "yes"});
+	}
+	
+	protected void addNewContent() {
+		// prompt user for more content.
+		while(addContent()) {
+			// make new content, get label and input.
+			Content newContent = new Content("","");
+			newContent.label = modifyVariable(newContent.label, "label");
+			newContent.input = modifyVariable(newContent.input, "content");
+			content.add(newContent);
+		}
+		
 	}
 	
 	private String listToString(String[] values){

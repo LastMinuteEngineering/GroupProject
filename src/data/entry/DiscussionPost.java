@@ -60,11 +60,13 @@ public class DiscussionPost extends Entry {
 		// prompt user to modify all content contained in the Entry.
 		modifyContent();
 		
+		// prompt user for new Content.
+		addNewContent();
 	}
 
 	@Override
 	public String getDetails(Boolean fullDetails) {
-		String string = getBaseInfo();
+		String string = getQuickInfo();
 		if (fullDetails) {
 				string = string
 				+ "\tCourse: \n\t" + course.getDetails(false)

@@ -9,7 +9,8 @@ public class CustomEnums {
 		DiscussionPost("Discussion Post"),
 		SocialEvent("Social Event"),
 		Reply("Reply"),
-		MentalHealthSupportRequest("Mental Health Support Request");
+		MentalHealthSupportRequest("Mental Health Support Request"),
+		Invalid("Invalid");
 		
 		public final String description;
 		
@@ -37,7 +38,7 @@ public class CustomEnums {
 			case "Mental Health Support Request" : 	type =  EntryType.MentalHealthSupportRequest;	
 													break;
 													
-			default :								type = null;
+			default :								type = EntryType.Invalid;
 													System.out.println(module + "Invalid identifier.");
 													break;
 			}
@@ -50,7 +51,8 @@ public class CustomEnums {
 	public enum AccessLevel{
 		Standard("Standard Acccess"),
 		Elevated("Elevated Access"),
-		Admin("Admin Access");
+		Admin("Admin Access"),
+		Invalid("Invalid");
 		
 		public final String description;
 		
@@ -72,7 +74,7 @@ public class CustomEnums {
 			case "Admin Access" : 		type = AccessLevel.Admin;
 										break;
 										
-			default :					type = null;
+			default :					type = AccessLevel.Invalid;
 										System.out.println(module + "Invalid identifier.");
 										break;
 			}
@@ -91,7 +93,8 @@ public class CustomEnums {
 		Passed("Passed"),
 		Unreviewed("Waiting For Review"),
 		Refused("Not Accepted"),
-		Accepted("Accepted");
+		Accepted("Accepted"),
+		Invalid("Invalid");
 		
 		public final String description;
 		
@@ -131,7 +134,7 @@ public class CustomEnums {
 			case "Accepted" : 			type = EntryStatus.Accepted;
 										break;
 										
-			default :					type = null;
+			default :					type = EntryStatus.Invalid;
 										System.out.println(module + "Invalid identifier.");
 										break;
 			}
@@ -144,7 +147,8 @@ public class CustomEnums {
 		Low("Low Priority"),
 		Medium("Medium Priority"),
 		High("High Priority"),
-		Critical("Critical Priority");
+		Critical("Critical Priority"),
+		Invalid("Invalid");
 		
 		public final String description;
 		
@@ -169,7 +173,7 @@ public class CustomEnums {
 			case "Critical Priority" : 	type = Urgency.Critical;
 										break;
 										
-			default :					type = null;
+			default :					type = Urgency.Invalid;
 										System.out.println(module + "Invalid identifier.");
 										break;
 			}
