@@ -32,6 +32,14 @@ public class Course {
 //
 //	Getters
 //		
+	public String getPrefix() {
+		return this.prefix;
+	}
+	
+	public String getNumb() {
+		return this.numb;
+	}
+	
 	public Iterator<UserAccount> getStudents(){
 		// create list to house student accounts.
 		ArrayList<UserAccount> students = new ArrayList<>();

@@ -24,6 +24,7 @@ public class CourseManager {
 		return instance;
 	}
 	
+	/*
 	public void addCourse(String prefix, String numb, String name, Integer capacity) {
 		
 		// Determine if course already exists.
@@ -45,6 +46,30 @@ public class CourseManager {
 		
 		// add course.
 		subjectCourses.put(numb, course);
+		
+		
+	}
+	*/
+	
+public void addCourse(Course course) {
+		
+		// Determine if course already exists.
+		if (getCourse(course.getPrefix(), course.getNumb(), false) != null) {
+			
+			System.out.println(module+ "Course already exists; cancelling operation." );
+			return;
+		}
+		
+		HashMap<String, Course> subjectCourses = courses.getOrDefault(course.getPrefix(), null);
+	
+		if (subjectCourses == null) {
+			// create subject course map
+			subjectCourses = new HashMap<String, Course>();
+			courses.put(course.getPrefix(), subjectCourses);			
+		}
+		
+		// add course.
+		subjectCourses.put(course.getNumb(), course);
 		
 		
 	}
