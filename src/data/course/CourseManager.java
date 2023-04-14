@@ -24,7 +24,7 @@ public class CourseManager {
 		return instance;
 	}
 	
-	/*
+	
 	public void addCourse(String prefix, String numb, String name, Integer capacity) {
 		
 		// Determine if course already exists.
@@ -49,7 +49,7 @@ public class CourseManager {
 		
 		
 	}
-	*/
+	
 	
 public void addCourse(Course course) {
 		
