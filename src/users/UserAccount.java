@@ -46,7 +46,8 @@ public abstract class UserAccount {
 	
 	protected String getBaseInfo() {
 		String string = getQuickInfo()
-				+ "\tPhone Number: \t" + phoneNumber
+				+ "\tAge: \t" + age
+				+ "\n\tPhone Number: \t" + phoneNumber
 				+ "\n\tAccess Level: \t" + accessLevel.description
 				+ "\n";
 				
@@ -80,9 +81,16 @@ public abstract class UserAccount {
 	
 	public void displayAllEntries() {
 		// display all entries with without all details.
-		System.out.println(firstName+"'s Entries \n\t");
-		
+		System.out.println(firstName+"'s Entries :\n"
+				+ "-".repeat(10));
+				
 		Iterator<String> entryIdIterator = entryIds.iterator();
+		
+		// handle case : no entries.
+		if (!entryIdIterator.hasNext()) {
+			System.out.println("None");
+		}
+		
 		while(entryIdIterator.hasNext()) {
 			String entryId = entryIdIterator.next();
 			getEntry(entryId).displayDetails(false);
@@ -145,7 +153,8 @@ public abstract class UserAccount {
 				+ "\n\t" + account.getAccountDetails(fullDetails);
 		}
 		
-		return string;
+		// return without last newline
+		return string.substring(0, string.length()-1);
 		
 	}
 	
@@ -154,7 +163,7 @@ public abstract class UserAccount {
 		// Handle case: no courses in list.
 		if (!courseIterator.hasNext()) {
 			return "\t" + "-".repeat(10)
-					+ "\n\tNone";
+					+ "\n\tNone\n";
 		}
 		
 		String string = "";

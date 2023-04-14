@@ -33,7 +33,7 @@ public class Student extends UserAccount {
 	
 	@Override
 	public String getAccountDetails(Boolean fullDetails) {
-		String string = fullDetails? getQuickInfo() : getBaseInfo();
+		String string = fullDetails ? getBaseInfo(): getQuickInfo();
 		
 		if (fullDetails) {
 			string = string

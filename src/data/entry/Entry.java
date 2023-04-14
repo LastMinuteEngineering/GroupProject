@@ -86,7 +86,7 @@ public abstract class Entry {
 	protected String modifyVariable(String toModify, String label) {
 		
 		// prompt user based on data; if toModify has data, display it and prompt user.
-		if (toModify.length() == 0) {
+		if (toModify.length() > 0) {
 			System.out.println(
 					"Stored " + label.toLowerCase() + ":"
 					+ "\n" + toModify
@@ -109,7 +109,7 @@ public abstract class Entry {
 	protected String modifyVariable(String toModify, String label, String[] allowableValues) {
 		
 		// prompt user based on data; if toModify has data, display it and prompt user.
-		if (toModify.length() == 0) {
+		if (toModify.length() > 0) {
 			System.out.println(
 					"Stored " + label.toLowerCase() + ":"
 					+ "\n" + toModify
@@ -122,7 +122,7 @@ public abstract class Entry {
 		String response = input.nextLine();
 		
 		// if user enters response, send it back for data modification, else return previous value.		
-		if (response.length() != 0) { 
+		if (response.length() == 0) { 
 			return response;
 		}else {
 			

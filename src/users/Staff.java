@@ -24,7 +24,7 @@ public class Staff extends UserAccount {
 	@Override
 	public String getAccountDetails(Boolean fullDetails) {
 		// get user info at specified level.
-		String string = fullDetails? getQuickInfo() : getBaseInfo();
+		String string = fullDetails ? getBaseInfo() : getQuickInfo();
 		
 		if (fullDetails) {
 			string = string

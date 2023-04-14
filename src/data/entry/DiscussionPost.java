@@ -74,7 +74,7 @@ public class DiscussionPost extends Entry {
 		}else {
 			// get replies in short form.
 			string = string 
-			+ "\n\tReplies:\n" + getReplyDetails(false) ;
+			+ "\tReplies:\n" + getReplyDetails(false) ;
 		}
 				
 		return string;
@@ -92,12 +92,21 @@ public class DiscussionPost extends Entry {
 	
 	// Utility functions
 	private String getReplyDetails(Boolean fullDetails) {
+		
 		String string = ""; 
 		Iterator<Entry> replyIterator = replies.iterator();
+		
+		// Handle case: no replies in list.
+		if (!replyIterator.hasNext()) {
+			return "\t" + "-".repeat(10)
+					+ "\n\tNone";
+		}
+				
 		while(replyIterator.hasNext()) {
 			Entry reply = replyIterator.next();
 			string = string
-			+ "\t" + reply.getDetails(fullDetails);
+			+"\t" + "-".repeat(10)
+			+ "\n\t" + reply.getDetails(fullDetails);
 		}
 		
 		return string;

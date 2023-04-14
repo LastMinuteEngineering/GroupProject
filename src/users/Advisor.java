@@ -2,7 +2,7 @@ package users;
 
 import java.util.ArrayList;
 
-public class Advisor extends UserAccount {
+public class Advisor extends Staff {
 	
 	private ArrayList<UserAccount> advised;
 	
@@ -23,12 +23,12 @@ public class Advisor extends UserAccount {
 	public String getAccountDetails(Boolean fullDetails) {
 		
 		// get user info at specified level.
-		String string = fullDetails? getQuickInfo() : getBaseInfo();
+		String string = super.getAccountDetails(fullDetails);
 		
 		if (fullDetails) {
 			string = string
 			+ "\tAdvisees:"
-			+ "\n\t" + getMultiAccountDetails(advised.iterator(), false)
+			+ "\n" + getMultiAccountDetails(advised.iterator(), false)
 			+ "\n";
 		}
 		return string;

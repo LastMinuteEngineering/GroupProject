@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import data.course.Course;
 import data.course.CourseManager;
 
-public class Instructor extends UserAccount {
+public class Instructor extends Advisor{
 	
 	private ArrayList<Course> courses;
 	private CourseManager cm;
@@ -27,7 +27,7 @@ public class Instructor extends UserAccount {
 
 	@Override
 	public String getAccountDetails(Boolean fullDetails) {
-		String string = fullDetails? getQuickInfo() : getBaseInfo();
+		String string = super.getAccountDetails(fullDetails);
 				
 		if (fullDetails) {
 			string = string

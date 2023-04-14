@@ -24,7 +24,7 @@ public class TestMain {
 		Instructor drBhattacharyya = new Instructor("Siddartha", "Bhattacharyya", "903XXXXXX", 45, "(321) XXX-XXXX");
 		Instructor drShoaff = new Instructor("William", "D", "Shoaff", "903XXXXXX", 55, "(321) XXX-XXXX");
 		
-		Staff drBernhard = new Staff("Phillip", "J", "Bernhard","903XXXXXX", 55, "(321) XXX-XXXX");
+		Instructor drBernhard = new Instructor("Phillip", "J", "Bernhard","903XXXXXX", 55, "(321) XXX-XXXX");
 		Staff cheryl = new Staff("Cheryl", "Mitravich","903XXXXXX", 45, "(321) XXX-XXXX");
 
 		Student angel = new Student("Angel", "Star", "903XXXXXXX", 21, "(321) XXX-XXXX");
@@ -34,6 +34,7 @@ public class TestMain {
 		malakai.changeAccessLevel(AccessLevel.Admin);
 		kyle.changeAccessLevel(AccessLevel.Elevated);
 		
+		// assign courses
 		angel.addCourse("CSE", "3421");
 		kyle.addCourse("CSE", "3421");
 		malakai.addCourse("CSE", "3421");
@@ -43,13 +44,22 @@ public class TestMain {
 		malakai.addCourse("CSE", "4010");
 		drShoaff.addCourse("CSE", "4010");
 
+		// adviser/advisee
 		malakai.changeAdvisor(drBhattacharyya);
+		drBhattacharyya.addAdvisee(malakai);
 		
+		// supervisor/subordinate
 		cheryl.changeSupervisor(drBernhard);
 		drBernhard.addSubordinate(cheryl);
+		
+		drBhattacharyya.changeSupervisor(drBernhard);
 		drBernhard.addSubordinate(drBhattacharyya);
+		
+		drShoaff.changeSupervisor(drBernhard);
 		drBernhard.addSubordinate(drShoaff);
 		
+		
+		// display details.
 		angel.displayAccountDetails(true);
 		kyle.displayAccountDetails(true);
 		malakai.displayAccountDetails(true);
@@ -57,6 +67,14 @@ public class TestMain {
 		drShoaff.displayAccountDetails(true);
 		cheryl.displayAccountDetails(true);
 		drBernhard.displayAccountDetails(true);
+		
+		//create entry
+		angel.createEntry(EntryType.DiscussionPost);
+		
+		// display entries.
+		angel.displayAllEntries();
+		
+		
 		
 		
 		
