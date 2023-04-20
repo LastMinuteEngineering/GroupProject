@@ -50,7 +50,7 @@ public class Instructor extends Advisor{
 		
 		// ensure instructor not already teaching course;
 		if (courses.contains(course)) {
-			System.out.println(firstName + " " + lastName + ":\t\"I'm already teaching this course.\"" );
+			System.out.println(getName() + ":\t\"I'm already teaching this course.\"" );
 			return;
 		}
 		
@@ -65,7 +65,7 @@ public class Instructor extends Advisor{
 	}
 	
 	public void displayCourses() {
-		String string = firstName + " " + lastName + " Teaching Courses:"
+		String string = getName() + " Teaching Courses:"
 				+ "\n" + getCourseLoadSummary(courses.iterator(), false);
 		
 		System.out.println(string);

@@ -37,7 +37,7 @@ public class Advisor extends Staff {
 	public void addAdvisee (UserAccount advisee) {
 		// ensure advisee not already in list.
 		if (advised.contains(advisee)) {
-			System.out.println(firstName + " " + lastName + ":\t\"I'm already advising this person.\"" );
+			System.out.println(getName() + ":\t\"I'm already advising this person.\"" );
 			return;
 		}
 		

@@ -86,6 +86,7 @@ public class DiscussionPost extends Entry {
 	
 	public void addReply() {
 		Entry reply = factory.createEntry(EntryType.Reply, this);
+		reply.promptForDetails();
 		replies.add(reply);
 	}
 	

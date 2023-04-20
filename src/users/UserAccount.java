@@ -36,6 +36,12 @@ public abstract class UserAccount {
 //
 //	User Account functions
 //  
+	public String getName() {
+		String string = firstName + " " 
+				+ ( middleName.length() == 0 ?  lastName : 
+					middleName + " " + lastName) ;
+		return string;
+	}
 	
 	public abstract String getAccountDetails(Boolean fullDetails);
 	
@@ -56,14 +62,13 @@ public abstract class UserAccount {
 	
 	protected String getQuickInfo() {
 		String string = ""
-				+ "Name: \t" + firstName + " " 
-					+ ( middleName.length() == 0 ?  lastName : 
-						middleName + " " + lastName) 
+				+ "Name: \t" + getName() 
 				+ "\n\tId: \t" + id
 				+ "\n";
 				
 		return string;
 	};
+	
 
 	
 //	

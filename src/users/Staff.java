@@ -51,7 +51,7 @@ public class Staff extends UserAccount {
 	public void changeSupervisor(UserAccount supervisor) {
 		// ensure passed supervisor is not the one already set.
 		if (this.supervisor == supervisor) {
-			System.out.println(firstName + " " + lastName + ":\t\"This person is already my supervisor.\"" );
+			System.out.println(getName() + ":\t\"This person is already my supervisor.\"" );
 			return;
 		}
 		this.supervisor = supervisor;
@@ -60,7 +60,7 @@ public class Staff extends UserAccount {
 	public void addSubordinate(UserAccount subordinate) {
 		// ensure subordinate not already in list.
 		if (subordinates.contains(subordinate)) {
-			System.out.println(firstName + " " + lastName + ":\t\"This person is already one of my subordinates.\"" );
+			System.out.println(getName() + ":\t\"This person is already one of my subordinates.\"" );
 			return;
 		}
 		subordinates.add(subordinate);

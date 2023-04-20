@@ -58,7 +58,7 @@ public class Student extends UserAccount {
 	public void changeAdvisor(UserAccount advisor) {
 		// ensure passed advisor is not the one already set.
 		if (this.advisor == advisor) {
-			System.out.println(firstName + " " + lastName + ":\t\"This person is already my advisor.\"" );
+			System.out.println(getName() + ":\t\"This person is already my advisor.\"" );
 			return;
 		}
 		this.advisor = advisor;
@@ -75,7 +75,7 @@ public class Student extends UserAccount {
 		
 		// ensure instructor not already teaching course;
 		if (courses.contains(course)) {
-			System.out.println(firstName + " " + lastName + ":\t\"I'm already taking this course.\"" );
+			System.out.println(getName() + ":\t\"I'm already taking this course.\"" );
 			return;
 		}
 		
@@ -90,7 +90,7 @@ public class Student extends UserAccount {
 	}
 	
 	public void displayCourses() {
-		String string = firstName + " " + lastName + " Taking Courses:"
+		String string = getName() + " Taking Courses:"
 				+ "\n" + getCourseLoadSummary(courses.iterator(), false);
 		
 		System.out.println(string);
@@ -163,6 +163,8 @@ public class Student extends UserAccount {
 		return (double) (qualityPoints / (coursesTaken*3));
 		
 	}
+	
+	// TODO : Add "'What-If' Grade" functionality 
 	
 	
 }

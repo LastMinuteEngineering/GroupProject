@@ -54,4 +54,6 @@ public class Storage {
 		
 		entries.put(entry.getId(), entry);
 	};
+	
+	// TODO : Add support for role-based entry access.
 }

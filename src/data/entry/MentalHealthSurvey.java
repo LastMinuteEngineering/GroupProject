@@ -29,10 +29,10 @@ public class MentalHealthSurvey extends Entry {
 	@Override
 	public void promptForDetails() {
 		// title of request.
-		title = modifyVariable(this.title, "request title");
+		title = modifyVariable(this.title, "Survey Title");
 		
 		// status of request; converts string back to enum.
-		status = EntryStatus.toEnum(modifyVariable(status.description, "request status", new String[] {
+		status = EntryStatus.toEnum(modifyVariable(status.description, "Survey Status", new String[] {
 			EntryStatus.Open.description,
 			EntryStatus.Closed.description,
 		}));

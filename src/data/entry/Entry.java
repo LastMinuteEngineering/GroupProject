@@ -123,9 +123,8 @@ public abstract class Entry {
 		
 		// if user enters response, send it back for data modification, else return previous value.		
 		if (response.length() == 0) { 
-			return response;
+			return toModify;
 		}else {
-			
 			// Loop while user input does not match one of the expected vals.
 			while(!stringContainsItemFromList(response, allowableValues)) {
 				System.out.println( response + " is not a valid " + label.toLowerCase() + ". Please try again (allowable values: " + listToString(allowableValues) + ") :");
