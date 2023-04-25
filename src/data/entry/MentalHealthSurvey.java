@@ -75,7 +75,7 @@ public class MentalHealthSurvey extends Entry {
 			System.out.println(content.label);
 			
 			// get response without showing previous responses.
-			content.input = content.input +"\n"+ modifyVariable("", "Response");
+			content.input = content.input +"\n\t"+ modifyVariable("", "Response");
 		}
 		
 	}

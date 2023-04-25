@@ -28,12 +28,17 @@ public class Demo {
 		user1.createEntry(EntryType.MentalHealthSurvey);
 		
 		
+		// add two responses
 		Storage db = Storage.getInstance();
 		Entry survey = db.getEntry("0");
 		
+		System.out.println("\nAdding Two Reponses\n");
 		((MentalHealthSurvey) survey).respond();
+		System.out.println("\n");
 		((MentalHealthSurvey) survey).respond();
 		
+		
+		System.out.println("\nDisplay all Survey details and Responses\n");
 		survey.displayDetails(true);
 		
 		
