@@ -72,7 +72,9 @@ public abstract class UserAccount {
 	};
 	
 	public void displayFriends() {
-		System.out.println("Friends:" + "\n" + getMultiAccountDetails(friends.getFriends()));
+		System.out.println("Friends:" 
+							+ "\n" + getMultiAccountDetails(friends.getFriends())
+							);
 	}
 	
 
