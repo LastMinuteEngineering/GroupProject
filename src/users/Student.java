@@ -44,9 +44,7 @@ public class Student extends UserAccount {
 					"\t" + "-".repeat(10) + 
 					"\n\t" + advisor.getAccountDetails(false))
 			+ "\tTaking Courses:"
-			+ "\n" + getCourseLoadSummary(courses.iterator(), false)
-			+ "\tFriends:"
-			+ "\n" + getMultiAccountDetails(friends.getFriends(), false);
+			+ "\n" + getCourseLoadSummary(courses.iterator(), false);
 		}
 		
 		return string;
