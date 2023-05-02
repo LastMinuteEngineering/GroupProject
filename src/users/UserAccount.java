@@ -8,6 +8,7 @@ import data.entry.Entry;
 import data.entry.EntryFactory;
 import data.storage.Storage;
 import data.course.Course;
+import users.interactions.FriendManager;
 
 public abstract class UserAccount {
 	
@@ -18,6 +19,7 @@ public abstract class UserAccount {
 	protected AccessLevel accessLevel;
 	// avoid having to import array list unnecessarily.
 	protected ArrayList<String> entryIds;
+	protected FriendManager friends;
 	
 	// common among all user accounts.
 	public UserAccount(String firstName, String middleName, String lastName,
@@ -68,6 +70,10 @@ public abstract class UserAccount {
 				
 		return string;
 	};
+	
+	public void displayFriends() {
+		System.out.println("Friends:" + "\n" + getMultiAccountDetails(friends.getFriends()));
+	}
 	
 
 	
@@ -135,9 +141,54 @@ public abstract class UserAccount {
 		return accessLevel.compareTo(minAccess) >= 0;
 	};
 	
+//
+// User -> User Interactions
+//
+	public void sendFriendRequest(String toAdd, String msg) {
+		friends.sendRequest(toAdd, msg, this);
+	}
+	public void addFriend(UserAccount friend) {
+		friends.addFriend(friend);
+	}
+	
+	public void receiveFriendRequest(UserAccount sender, String msg) {
+		friends.addRequest(sender, msg);
+	}
+	
+	public void handleFriendRequests() {
+		friends.handleFriendRequests(this);
+	}
+	
+	public void removeFriendRequest(UserAccount user) {
+		friends.removePendingRequest(user);
+	}
+	
+	
 // 
 //	Utility functions
 //	
+	protected String getMultiAccountDetails(Iterator<UserAccount> accountIterator) {
+		String string = "-".repeat(10);
+		
+		// Handle case: no accounts in list.
+		if (!accountIterator.hasNext()) {
+			return string
+					+ "\n\tNone";
+		}
+		
+		
+		// cycle through passed accounts.
+		while(accountIterator.hasNext()) {
+			UserAccount account = accountIterator.next();
+			
+			// append user name.
+			string = string
+				+ "\n\t" + account.getName();
+		}
+		
+		return string;
+	}
+	
 	protected String getMultiAccountDetails(Iterator<UserAccount> accountIterator, Boolean fullDetails) {
 		
 		// Handle case: no accounts in list.

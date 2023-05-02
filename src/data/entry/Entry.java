@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import common.types.Content;
 import common.types.CustomEnums.*;
+import common.Utils;
 
 public abstract class Entry {
 	
@@ -113,10 +114,10 @@ public abstract class Entry {
 			System.out.println(
 					"Stored " + label.toLowerCase() + ":"
 					+ "\n" + toModify
-					+ "\nEnter " + label.toLowerCase() + " (allowable values: " + listToString(allowableValues) + ")"
+					+ "\nEnter " + label.toLowerCase() + " (allowable values: " + Utils.listToString(allowableValues) + ")"
 							+ " or leave blank and press enter to keep stored " + label.toLowerCase() + ":" );
 		}else {
-			System.out.println("Enter " + label.toLowerCase() + " (allowable values: " + listToString(allowableValues) + ") :");
+			System.out.println("Enter " + label.toLowerCase() + " (allowable values: " + Utils.listToString(allowableValues) + ") :");
 		}
 		
 		String response = input.nextLine();
@@ -126,8 +127,8 @@ public abstract class Entry {
 			return toModify;
 		}else {
 			// Loop while user input does not match one of the expected vals.
-			while(!stringContainsItemFromList(response, allowableValues)) {
-				System.out.println( response + " is not a valid " + label.toLowerCase() + ". Please try again (allowable values: " + listToString(allowableValues) + ") :");
+			while(!Utils.stringContainsItemFromList(response, allowableValues)) {
+				System.out.println( response + " is not a valid " + label.toLowerCase() + ". Please try again (allowable values: " + Utils.listToString(allowableValues) + ") :");
 				response = input.nextLine();
 			}
 		}
@@ -158,13 +159,13 @@ public abstract class Entry {
 		String response = input.nextLine();
 		
 		// loop while answer is not yes/no or similar.
-		while(!stringContainsItemFromList(response, new String[] {"Y", "y", "Yes", "yes", "N", "n", "No", "no"})) {
+		while(!Utils.stringContainsItemFromList(response, new String[] {"Y", "y", "Yes", "yes", "N", "n", "No", "no"})) {
 			System.out.println( "Please enter yes, y, no, or n):");
 			response = input.nextLine();
 		}
 		
 		// return true if user replied y/yes.
-		return stringContainsItemFromList(response, new String[] {"Y", "y", "Yes", "yes"});
+		return Utils.stringContainsItemFromList(response, new String[] {"Y", "y", "Yes", "yes"});
 	}
 	
 	protected void addNewContent() {
@@ -177,16 +178,6 @@ public abstract class Entry {
 			content.add(newContent);
 		}
 		
-	}
-	
-	private String listToString(String[] values){
-		// return array vals as string : "val1, val2, ..., valN"
-		return String.join(", ", values);
-	}
-	
-	private boolean stringContainsItemFromList(String inputStr, String[] items) {
-		// return true if inputStr matches one of the strings in items array.
-	    return Arrays.stream(items).anyMatch(inputStr::contains);
 	}
 	
 }

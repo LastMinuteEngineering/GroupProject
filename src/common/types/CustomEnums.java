@@ -186,6 +186,38 @@ public class CustomEnums {
 		}
 	}
 	
+	public enum RequestResponse{
+		Accept("Accept"),
+		Reject("Reject"),
+		Invalid("Invalid");
+		
+		public final String description;
+		
+		// assign string version of Access Level for printing.
+		private RequestResponse(String description) {
+			this.description = description;
+		}
+		
+		public static RequestResponse toEnum(String description) {
+			RequestResponse type;
+			
+			switch (description) {
+			case "Accept" : 			type = RequestResponse.Accept;
+										break;
+										
+			case "Reject" : 			type = RequestResponse.Reject;
+										break;
+										
+			default :					type = RequestResponse.Invalid;
+										System.out.println(module + "Invalid identifier.");
+										break;
+			}
+			
+			return type;
+		}
+		
+	}
+	
 	
 	
 }

@@ -3,7 +3,6 @@ package demo;
 import common.types.CustomEnums.EntryType;
 import data.storage.Storage;
 import external.AuthorizationProvider;
-import external.Registrar;
 import users.UserAccount;
 import data.entry.Entry;
 import data.entry.MentalHealthSurvey;
@@ -14,9 +13,6 @@ public class Demo {
 		
 		
 		Storage.createDatabase();
-		
-		// spoof api call to load course
-		Registrar.loadCourses();
 		
 		// spoof call to auth service to load user data after login
 		AuthorizationProvider authprovider = AuthorizationProvider.getInstance();

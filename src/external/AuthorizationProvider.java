@@ -6,14 +6,14 @@ import java.util.Scanner;
 import users.UserAccount;
 
 public class AuthorizationProvider {
-	
+
+	private Registrar registrar;
+	private Scanner input;
 	private static AuthorizationProvider instance;
-	HashMap<String, UserAccount> users;
-	Scanner input;
 
 	public AuthorizationProvider() {
-		users = Registrar.getUsers();
-		input = new Scanner(System.in);
+		this.registrar = Registrar.getInstance();
+		this.input = new Scanner(System.in);
 	}
 	
 	public static AuthorizationProvider getInstance() {
@@ -32,7 +32,7 @@ public class AuthorizationProvider {
 		System.out.println("Password:");
 		String p = input.nextLine();	// not used for demo
 		
-		return users.getOrDefault(response, null);
+		return registrar.findUser(response);
 		
 	}
 	

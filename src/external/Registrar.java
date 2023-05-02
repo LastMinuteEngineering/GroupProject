@@ -8,18 +8,39 @@ import data.course.*;
 
 public class Registrar {
 	
-	public static void loadCourses() {
-		CourseManager cm = CourseManager.getInstance();
+	private HashMap<String, UserAccount> users;
+	private CourseManager cm;
+	private static Registrar instance;
+	
+	public Registrar() {
+		
+		this.users = new HashMap<>();
+		this.cm = CourseManager.getInstance();
+		
+		loadCourses();
+		loadUsers();
+	}
+	
+	public static Registrar getInstance() {
+		
+		if (instance == null) {
+			instance = new Registrar();
+		}
+		
+		return instance;
+	}
+	
+	public UserAccount findUser(String toFind) {
+		return users.getOrDefault(toFind, null);
+	}
+	
+	private void loadCourses() {
 		cm.addCourse("CSE", "3421", "Design Methods", 30);
 		cm.addCourse("CSE", "4010", "Senior Project", 15);
 	}
 
-	public static HashMap<String, UserAccount> getUsers() {
-		
-		HashMap<String, UserAccount> users = new HashMap<>();
-		
-		// testing users
-		
+	private void loadUsers() {
+				
 		Instructor drBhattacharyya = new Instructor("Siddartha", "Bhattacharyya", "903XXXXXX", 45, "(321) XXX-XXXX");
 		Instructor drShoaff = new Instructor("William", "D", "Shoaff", "903XXXXXX", 55, "(321) XXX-XXXX");
 		
@@ -66,7 +87,6 @@ public class Registrar {
 		users.put("astar", angel);
 		users.put("kstewart", kyle);
 		users.put("mstanisclaus", malakai);
-		
-		return users;
 	}
+	
 }
