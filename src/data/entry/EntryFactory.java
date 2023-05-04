@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import common.types.CustomEnums.*;
 import data.storage.Storage;
+import external.EmergencyCommunication;
 
 public class EntryFactory {
 
@@ -48,6 +49,9 @@ public class EntryFactory {
 									
 		case Newsletter	:			entry = createNewsletter();
 									break;
+									
+		case SecurityReport :		entry = createSecurityReport();
+									break;
 											
 		case Reply: 				entry = null;
 									System.out.println(module + "No parent entry; cancelling operation.");
@@ -59,8 +63,10 @@ public class EntryFactory {
 		}
 			
 		
-		// add to storage.
-		db.addEntry(entry);
+		if (entry != null){
+			// add to storage.
+			db.addEntry(entry);
+		}
 
 		return entry;
 	};
@@ -104,6 +110,15 @@ public class EntryFactory {
 	
 	private Entry createNewsletter() {
 		return new Newsletter(getId(), getTimeStamp());
+	}
+	
+	private Entry createSecurityReport() {
+		if (SecurityReport.isUrgent()) {
+			EmergencyCommunication.contactEmergencyServices();
+			return null;
+		}else {
+			return new SecurityReport(getId(), getTimeStamp());
+		}
 	}
 	
 //

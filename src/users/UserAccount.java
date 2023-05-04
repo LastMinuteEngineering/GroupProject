@@ -86,9 +86,11 @@ public abstract class UserAccount {
 		EntryFactory factory = EntryFactory.getInstance();
 		Entry entry = factory.createEntry(type);
 		
-		modifyEntry(entry);	
-		// add to list.
-		entryIds.add(entry.getId());
+		if (entry != null) {
+			modifyEntry(entry);	
+			// add to list.
+			entryIds.add(entry.getId());
+		}
 	};
 	
 	public void displayAllEntries() {
