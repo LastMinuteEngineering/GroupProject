@@ -1,6 +1,5 @@
 package data.entry;
 
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -16,7 +15,6 @@ public abstract class Entry {
 	protected String title;
 	protected EntryStatus status;
 	protected String creation;
-	// avoid having to import ArrayList lib in every entry.
 	protected ArrayList<Content> content;
 	
 	protected Scanner input = new Scanner (System.in);

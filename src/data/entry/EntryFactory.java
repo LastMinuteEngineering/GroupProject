@@ -45,6 +45,9 @@ public class EntryFactory {
 		
 		case MentalHealthSurvey : 	entry = createMentalHealthSurvey();
 									break;
+									
+		case Newsletter	:			entry = createNewsletter();
+									break;
 											
 		case Reply: 				entry = null;
 									System.out.println(module + "No parent entry; cancelling operation.");
@@ -99,6 +102,9 @@ public class EntryFactory {
 		return new MentalHealthSurvey(getId(), getTimeStamp());
 	}
 	
+	private Entry createNewsletter() {
+		return new Newsletter(getId(), getTimeStamp());
+	}
 	
 //
 //	Utility functions

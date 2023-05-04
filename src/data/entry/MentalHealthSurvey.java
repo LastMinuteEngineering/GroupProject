@@ -1,6 +1,5 @@
 package data.entry;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import common.types.Content;

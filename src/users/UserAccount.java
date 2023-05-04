@@ -77,7 +77,6 @@ public abstract class UserAccount {
 							);
 	}
 	
-
 	
 //	
 //	Entry functions
@@ -144,7 +143,7 @@ public abstract class UserAccount {
 	};
 	
 //
-// User -> User Interactions
+// 	User -> User Interactions
 //
 	public void sendFriendRequest(String toAdd, String msg) {
 		friends.sendRequest(toAdd, msg, this);
@@ -165,7 +164,16 @@ public abstract class UserAccount {
 		friends.removePendingRequest(user);
 	}
 	
+//
+// 	Newsletter Functions
+//
+	public void subscribeToNewsletter() {
+		
+	}
 	
+	public void unsubscribeFromNewsletter () {
+		
+	}
 // 
 //	Utility functions
 //	

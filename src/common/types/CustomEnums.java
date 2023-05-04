@@ -11,6 +11,7 @@ public class CustomEnums {
 		Reply("Reply"),
 		MentalHealthSupportRequest("Mental Health Support Request"),
 		MentalHealthSurvey("Mental Health Survey"),
+		Newsletter("Newsletter"),
 		Invalid("Invalid");
 		
 		public final String description;
@@ -40,6 +41,9 @@ public class CustomEnums {
 													break;
 			
 			case "Mental Health Survey" : 			type =  EntryType.MentalHealthSurvey;	
+													break;
+													
+			case "Newsletter"			:			type =	EntryType.Newsletter;
 													break;
 													
 			default :								type = EntryType.Invalid;
@@ -98,6 +102,7 @@ public class CustomEnums {
 		Unreviewed("Waiting For Review"),
 		Refused("Not Accepted"),
 		Accepted("Accepted"),
+		Posted("Posted"),
 		Invalid("Invalid");
 		
 		public final String description;
@@ -136,6 +141,9 @@ public class CustomEnums {
 										break;
 										
 			case "Accepted" : 			type = EntryStatus.Accepted;
+										break;
+			
+			case "Posted":				type = EntryStatus.Posted;
 										break;
 										
 			default :					type = EntryStatus.Invalid;

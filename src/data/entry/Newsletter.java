@@ -3,29 +3,25 @@ package data.entry;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import data.course.Course;
-import data.course.CourseManager;
 import common.types.Content;
-import common.types.CustomEnums.*;
+import common.types.CustomEnums.EntryStatus;
+import common.types.CustomEnums.EntryType;
 
-public class DiscussionPost extends Entry {
-	
+public class Newsletter extends Entry {
+
 	private ArrayList<Entry> replies;
-	private Course course;
 	private Integer likes;	
 	private Content description;
-	private CourseManager cm;
 	private EntryFactory factory;
 	
-	public DiscussionPost(String id, String creation) {
+	public Newsletter(String id, String creation) {
 		super(id, creation);
 		
-		this.status = EntryStatus.Open;
+		this.status = EntryStatus.Unreviewed;
 		this.likes = 0;
 		
-		this.description = new Content("Discussion Description", "");
+		this.description = new Content("Letter Description", "");
 		this.replies = new ArrayList<>();
-		this.cm = CourseManager.getInstance();
 		this.factory = EntryFactory.getInstance();
 		
 		content.add(description);
@@ -35,25 +31,17 @@ public class DiscussionPost extends Entry {
 
 	@Override
 	public void promptForDetails() {
-		// title of discussion.
+		// title of letter.
 		title = modifyVariable(this.title, "discussion title");
 		
-		// status of discussion; converts string back to enum.
-		status = EntryStatus.toEnum(modifyVariable(status.description, "discussion status", new String[] {
-			EntryStatus.Open.description,
-			EntryStatus.Closed.description
+		// status of letter; converts string back to enum.
+		status = EntryStatus.toEnum(modifyVariable(status.description, "letter status", new String[] {
+			EntryStatus.Unreviewed.description,
+			EntryStatus.Accepted.description,
+			EntryStatus.Refused.description,
+			EntryStatus.Posted.description,
 		}));
 		
-		// associate course to discussion.
-		do {
-			String coursePrefix = "";
-			String courseNumb = "";
-			coursePrefix = modifyVariable(coursePrefix, "course prefix");
-			courseNumb = modifyVariable(courseNumb, "course number");
-			
-			course = cm.getCourse(coursePrefix, courseNumb);
-			
-		}while (course == null);
 		
 		// prompt user to modify all content contained in the Entry.
 		modifyContent();
@@ -67,8 +55,7 @@ public class DiscussionPost extends Entry {
 		String string = getQuickInfo();
 		if (fullDetails) {
 				string = string
-				+ "\tCourse: \n\t" + course.getDetails(false)
-				+ getContent()
+				+ "\t" + getContent()
 				+ "\tLikes: \t" + likes
 				+ "\n\tReplies:\n" + getReplyDetails(true) ;
 		}else {
@@ -113,7 +100,5 @@ public class DiscussionPost extends Entry {
 		
 		return string;
 	}
-	
-
 
 }
