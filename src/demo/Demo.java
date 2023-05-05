@@ -14,27 +14,25 @@ public class Demo {
 		
 		Storage.createDatabase();
 		
+		System.out.println("Type 'astar' and enter an any password to begin.");
+		
 		// spoof call to auth service to load user data after login
 		AuthorizationProvider authprovider = AuthorizationProvider.getInstance();
 		UserAccount user1 = authprovider.login();
-		
 		
 		user1.displayAccountDetails(true);
 		
 		user1.createEntry(EntryType.MentalHealthSurvey);
 		
-		
-		// add two responses
+		// add a responses
 		Storage db = Storage.getInstance();
 		Entry survey = db.getEntry("0");
 		
-		System.out.println("\nAdding Two Reponses\n");
-		((MentalHealthSurvey) survey).respond();
-		System.out.println("\n");
+		System.out.println("\nAdding one reponse\n");
 		((MentalHealthSurvey) survey).respond();
 		
 		
-		System.out.println("\nDisplay all Survey details and Responses\n");
+		System.out.println("\nDisplay all Survey details including response.\n");
 		survey.displayDetails(true);
 		
 		

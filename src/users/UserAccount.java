@@ -170,11 +170,11 @@ public abstract class UserAccount {
 // 	Newsletter Functions
 //
 	public void subscribeToNewsletter() {
-		
+		// TBA
 	}
 	
 	public void unsubscribeFromNewsletter () {
-		
+		// TBA
 	}
 // 
 //	Utility functions
